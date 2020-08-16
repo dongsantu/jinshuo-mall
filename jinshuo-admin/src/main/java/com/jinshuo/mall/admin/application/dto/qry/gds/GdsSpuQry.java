@@ -13,7 +13,7 @@ import java.util.List;
 public class GdsSpuQry extends PageQry {
 
     @ApiModelProperty(value = "查询类型 1：最新开抢 2：开抢预告  3:已结束抢购  4:即将结束抢购")
-    private String qryType;
+    private Integer qryType;
 
     @ApiModelProperty(value = "排序类型 1：销售价 2：销量  3：库存  4：添加时间 5：权重")
     private Integer sortType;
@@ -31,7 +31,7 @@ public class GdsSpuQry extends PageQry {
     private Long categoryId;
 
     @ApiModelProperty(value = "商品名称")
-    private String name;
+    private String spuName;
 
     @ApiModelProperty(value = "标签")
     private List<Long> tags;
@@ -56,4 +56,7 @@ public class GdsSpuQry extends PageQry {
 
     @ApiModelProperty(value = "地区")
     private String areaName;
+
+    @ApiModelProperty(value = "是否单规格")
+    private Integer singleSku;
 }

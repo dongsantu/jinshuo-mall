@@ -21,7 +21,7 @@ public abstract class CoreBaseEntity extends AssertionConcern implements Seriali
      * 实体编号（唯一标识）
      **/
     @JsonSerialize(using = ToStringSerializer.class)
-    public Long id = -1L;
+    public Long id;
 
     /**
      * 是否是新记录（默认：false），调用setIsNewRecord()设置新记录，使用自定义ID。

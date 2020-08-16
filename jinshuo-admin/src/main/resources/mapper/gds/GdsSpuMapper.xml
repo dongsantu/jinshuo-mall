@@ -61,7 +61,6 @@
     <select id="selectGdsSpuList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSpu" resultMap="GdsSpuResult">
         <include refid="selectGdsSpuVo"/>
         <where>
-            <if test="id != null ">and id = #{id}</if>
             <if test="spuName != null  and spuName != '' ">and spu_name = #{spuName}</if>
             <if test="goodsStatus != null ">and goods_status = #{goodsStatus}</if>
             <if test="upTime != null ">and up_time = #{upTime}</if>
@@ -280,34 +279,38 @@
             resultMap="GdsSpuResult">
         <include refid="selectGdsSpuVo"/>
         <where>
-            status=0 AND goods_tatus = 0
+            status=0
+            AND goods_status = 0
             AND now() &gt; up_time
             AND now() &lt; down_time
             <if test="brandId != null  "> AND brand_id = #{brandId}</if>
-            <if test="category_id != null  "> AND brand_id = #{categoryId}</if>
-            <if test="name != null and name != '' "> AND name LIKE concat('%',#{name},'%') </if>
-            <if test="isScareBuy != null  "> AND is_scare_buy = #{isScareBuy},</if>
-            <if test="isHot != null  "> AND is_hot = #{isHot},</if>
-            <if test="isDis != null  "> AND is_dis = #{isDis},</if>
-            <if test="singleSku != null  "> AND single_sku = #{singleSku},</if>
+            <if test="categoryId != null  "> AND category_id = #{categoryId}</if>
+            <if test="spuName != null and spuName != '' "> AND spu_name LIKE concat('%',#{spuName},'%') </if>
+            <if test="isScareBuy != null  "> AND is_scare_buy = #{isScareBuy} </if>
+            <if test="isHot != null  "> AND is_hot = #{isHot} </if>
+            <if test="isDis != null  "> AND is_dis = #{isDis} </if>
+            <if test="singleSku != null  "> AND single_sku = #{singleSku} </if>
         </where>
+
         <include refid="qryTypeLogic"/>
-        <include refid="sortLogic"/>
+
+        <!--<include refid="sortLogic"/>-->
+
     </select>
 
     <!-- 查询类型逻辑处理  -->
     <sql id="qryTypeLogic">
+
         <choose>
-            <when test="null ！=qryType">
-                <!-- 查询类型 1：最新开抢 2：开抢预告  3:已结束抢购  4:即将结束抢购 -->
+            <when test="qryType != null ">
                 <if test="1==qryType"> AND is_scare_buy = 0 AND buy_start_date &lt; now() AND  now() &lt; buy_end_date  </if>
                 <if test="2==qryType"> AND is_scare_buy = 0 AND buy_start_date &gt; NOW()  </if>
-                <if test="3==qryType"> AND is_scare_buy = 0 AND buy_end_date 	&lt; NOW() </if>
+                <if test="3==qryType"> AND is_scare_buy = 0 AND buy_end_date &lt; NOW() </if>
             </when>
             <otherwise>
+                AND status=0
             </otherwise>
         </choose>
-
     </sql>
 
 
@@ -315,11 +318,11 @@
     <sql id="sortLogic">
         <choose>
             <when test="null ！=sortType">
-                <if test="1==sortType">ORDER BY price</if>
-                <if test="2==sortType">ORDER BY realSales</if>
-                <if test="3==sortType">ORDER BY stock</if>
-                <if test="4==sortType">ORDER BY create_date</if>
-                <if test="5==sortType">ORDER BY sort</if>
+                <if test="1==sortType"> ORDER BY price </if>
+                <if test="2==sortType"> ORDER BY realSales </if>
+                <if test="3==sortType"> ORDER BY stock </if>
+                <if test="4==sortType"> ORDER BY create_date </if>
+                <if test="5==sortType"> ORDER BY sort </if>
             </when>
             <otherwise>
                 ORDER BY sort

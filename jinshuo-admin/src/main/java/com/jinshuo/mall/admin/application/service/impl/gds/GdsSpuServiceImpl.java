@@ -47,8 +47,7 @@ public class GdsSpuServiceImpl implements IGdsSpuService {
     public PageInfo selectGdsSpuPage(GdsSpuQry qry) {
         log.info(" ----->>>>>>>> selectGdsSpuPage,前端查询订单信息，入参->{}: ", qry);
         PageHelper.startPage(qry.getPageNum(), qry.getPageSize());
-        GdsSpu temp = new GdsSpu();
-        List<GdsSpu> gdsSpus = gdsSpuMapper.selectGdsSpuList(temp);
+        List<GdsSpu> gdsSpus = gdsSpuMapper.selectListByFront(qry);
         PageInfo pageInfo = new PageInfo(gdsSpus);
         List<GdsSpuFrontVo> vos = gdsSpus.stream().map(gdsSpu -> GdsSpuAssermbler.assembleBrandDto(gdsSpu)).collect(Collectors.toList());
         pageInfo.setList(vos);
