@@ -294,11 +294,12 @@
 
         <include refid="qryTypeLogic"/>
 
-        <!--<include refid="sortLogic"/>-->
+        <include refid="sortLogic"/>
 
     </select>
 
     <!-- 查询类型逻辑处理  -->
+    <!-- 查询类型逻辑处理 查询类型 1：最新开抢 2：开抢预告  3:已结束抢购  4:即将结束抢购 -->
     <sql id="qryTypeLogic">
 
         <choose>
@@ -315,9 +316,11 @@
 
 
     <!-- 排序逻辑处理 -->
+    <!-- 排序逻辑处理 排序类型 1：销售价 2：销量  3：库存  4：添加时间 5：权重 -->
     <sql id="sortLogic">
+
         <choose>
-            <when test="null ！=sortType">
+            <when test="sortType != null ">
                 <if test="1==sortType"> ORDER BY price </if>
                 <if test="2==sortType"> ORDER BY realSales </if>
                 <if test="3==sortType"> ORDER BY stock </if>
@@ -330,9 +333,9 @@
         </choose>
 
         <choose>
-            <when test="null ！=isAscending">
+            <when test="isAscending != null ">
                 <choose>
-                    <when test="0 ==isAscending">
+                    <when test="0==isAscending">
                     </when>
                     <otherwise>
                         DESC
@@ -343,6 +346,7 @@
                 DESC
             </otherwise>
         </choose>
+
     </sql>
 
 </mapper>
