@@ -13,7 +13,7 @@ public class GdsSpuAssermbler {
      * @param target
      * @return
      */
-    public static GdsSpuFrontVo assembleBrandDto(GdsSpu target) {
+    public static GdsSpuFrontVo assGdsSpuFrontVo(GdsSpu target) {
         if (target == null) {
             return null;
         }

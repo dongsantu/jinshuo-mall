@@ -49,7 +49,7 @@ public class GdsSpuServiceImpl implements IGdsSpuService {
         PageHelper.startPage(qry.getPageNum(), qry.getPageSize());
         List<GdsSpu> gdsSpus = gdsSpuMapper.selectListByFront(qry);
         PageInfo pageInfo = new PageInfo(gdsSpus);
-        List<GdsSpuFrontVo> vos = gdsSpus.stream().map(gdsSpu -> GdsSpuAssermbler.assembleBrandDto(gdsSpu)).collect(Collectors.toList());
+        List<GdsSpuFrontVo> vos = gdsSpus.stream().map(gdsSpu -> GdsSpuAssermbler.assGdsSpuFrontVo(gdsSpu)).collect(Collectors.toList());
         pageInfo.setList(vos);
         return pageInfo;
     }

@@ -18,7 +18,7 @@ public class GdsSpuFrontVo {
     private Long id;
 
     @ApiModelProperty(value = "产品名称")
-    private String name;
+    private String spuName;
 
     @ApiModelProperty(value = "简介")
     private String  sketch;
