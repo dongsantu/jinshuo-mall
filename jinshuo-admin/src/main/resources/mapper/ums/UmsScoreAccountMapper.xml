@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsScoreAccountMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsScoreAccount" id="UmsScoreAccountResult">
+        <result property="id"    column="id"    />
+        <result property="memId"    column="mem_id"    />
+        <result property="totalScore"    column="total_score"    />
+        <result property="expendScore"    column="expend_score"    />
+        <result property="useableScore"    column="useable_score"    />
+    </resultMap>
+	
+	<sql id="selectUmsScoreAccountVo">
+        select id, mem_id, total_score, expend_score, useable_score from ums_score_account
+    </sql>
+	
+    <select id="selectUmsScoreAccountList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsScoreAccount" resultMap="UmsScoreAccountResult">
+        <include refid="selectUmsScoreAccountVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="memId != null "> and mem_id = #{memId}</if>
+             <if test="totalScore != null "> and total_score = #{totalScore}</if>
+             <if test="expendScore != null "> and expend_score = #{expendScore}</if>
+             <if test="useableScore != null "> and useable_score = #{useableScore}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsScoreAccountById" parameterType="Long" resultMap="UmsScoreAccountResult">
+        <include refid="selectUmsScoreAccountVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsScoreAccount" parameterType="com.jinshuo.mall.admin.domain.ums.UmsScoreAccount">
+        insert into ums_score_account
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="memId != null  ">mem_id,</if>
+			<if test="totalScore != null  ">total_score,</if>
+			<if test="expendScore != null  ">expend_score,</if>
+			<if test="useableScore != null  ">useable_score,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="memId != null  ">#{memId},</if>
+			<if test="totalScore != null  ">#{totalScore},</if>
+			<if test="expendScore != null  ">#{expendScore},</if>
+			<if test="useableScore != null  ">#{useableScore},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsScoreAccount" parameterType="com.jinshuo.mall.admin.domain.ums.UmsScoreAccount">
+        update ums_score_account
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="memId != null  ">mem_id = #{memId},</if>
+            <if test="totalScore != null  ">total_score = #{totalScore},</if>
+            <if test="expendScore != null  ">expend_score = #{expendScore},</if>
+            <if test="useableScore != null  ">useable_score = #{useableScore},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsScoreAccountById" parameterType="Long">
+        update  ums_score_account set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

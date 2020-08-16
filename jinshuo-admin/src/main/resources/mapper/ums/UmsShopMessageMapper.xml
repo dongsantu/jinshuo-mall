@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsShopMessageMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsShopMessage" id="UmsShopMessageResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+        <result property="signName"    column="sign_name"    />
+        <result property="total"    column="total"    />
+        <result property="used"    column="used"    />
+        <result property="remaining"    column="remaining"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectUmsShopMessageVo">
+        select id, shop_id, username, password, sign_name, total, used, remaining, create_date, update_date, remarks, status, version from ums_shop_message
+    </sql>
+	
+    <select id="selectUmsShopMessageList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShopMessage" resultMap="UmsShopMessageResult">
+        <include refid="selectUmsShopMessageVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="username != null  and username != '' "> and username = #{username}</if>
+             <if test="password != null  and password != '' "> and password = #{password}</if>
+             <if test="signName != null  and signName != '' "> and sign_name = #{signName}</if>
+             <if test="total != null "> and total = #{total}</if>
+             <if test="used != null "> and used = #{used}</if>
+             <if test="remaining != null "> and remaining = #{remaining}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsShopMessageById" parameterType="Long" resultMap="UmsShopMessageResult">
+        <include refid="selectUmsShopMessageVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsShopMessage" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShopMessage">
+        insert into ums_shop_message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="username != null  and username != ''  ">username,</if>
+			<if test="password != null  and password != ''  ">password,</if>
+			<if test="signName != null  and signName != ''  ">sign_name,</if>
+			<if test="total != null  ">total,</if>
+			<if test="used != null  ">used,</if>
+			<if test="remaining != null  ">remaining,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="username != null  and username != ''  ">#{username},</if>
+			<if test="password != null  and password != ''  ">#{password},</if>
+			<if test="signName != null  and signName != ''  ">#{signName},</if>
+			<if test="total != null  ">#{total},</if>
+			<if test="used != null  ">#{used},</if>
+			<if test="remaining != null  ">#{remaining},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsShopMessage" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShopMessage">
+        update ums_shop_message
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="username != null  and username != ''  ">username = #{username},</if>
+            <if test="password != null  and password != ''  ">password = #{password},</if>
+            <if test="signName != null  and signName != ''  ">sign_name = #{signName},</if>
+            <if test="total != null  ">total = #{total},</if>
+            <if test="used != null  ">used = #{used},</if>
+            <if test="remaining != null  ">remaining = #{remaining},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsShopMessageById" parameterType="Long">
+        update  ums_shop_message set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

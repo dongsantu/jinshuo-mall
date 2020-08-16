@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsUserMenuMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsUserMenu" id="UmsUserMenuResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="menuId"    column="menu_id"    />
+    </resultMap>
+	
+	<sql id="selectUmsUserMenuVo">
+        select id, user_id, menu_id from ums_user_menu
+    </sql>
+	
+    <select id="selectUmsUserMenuList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUserMenu" resultMap="UmsUserMenuResult">
+        <include refid="selectUmsUserMenuVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="userId != null "> and user_id = #{userId}</if>
+             <if test="menuId != null "> and menu_id = #{menuId}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsUserMenuById" parameterType="Long" resultMap="UmsUserMenuResult">
+        <include refid="selectUmsUserMenuVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsUserMenu" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUserMenu">
+        insert into ums_user_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="userId != null  ">user_id,</if>
+			<if test="menuId != null  ">menu_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="userId != null  ">#{userId},</if>
+			<if test="menuId != null  ">#{menuId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsUserMenu" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUserMenu">
+        update ums_user_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null  ">user_id = #{userId},</if>
+            <if test="menuId != null  ">menu_id = #{menuId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsUserMenuById" parameterType="Long">
+        update  ums_user_menu set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsUserRolesMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsUserRoles" id="UmsUserRolesResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="roleId"    column="role_id"    />
+    </resultMap>
+	
+	<sql id="selectUmsUserRolesVo">
+        select id, user_id, role_id from ums_user_roles
+    </sql>
+	
+    <select id="selectUmsUserRolesList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUserRoles" resultMap="UmsUserRolesResult">
+        <include refid="selectUmsUserRolesVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="userId != null "> and user_id = #{userId}</if>
+             <if test="roleId != null "> and role_id = #{roleId}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsUserRolesById" parameterType="Long" resultMap="UmsUserRolesResult">
+        <include refid="selectUmsUserRolesVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsUserRoles" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUserRoles">
+        insert into ums_user_roles
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="userId != null  ">user_id,</if>
+			<if test="roleId != null  ">role_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="userId != null  ">#{userId},</if>
+			<if test="roleId != null  ">#{roleId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsUserRoles" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUserRoles">
+        update ums_user_roles
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null  ">user_id = #{userId},</if>
+            <if test="roleId != null  ">role_id = #{roleId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsUserRolesById" parameterType="Long">
+        update  ums_user_roles set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

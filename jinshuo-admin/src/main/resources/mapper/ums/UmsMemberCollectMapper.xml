@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsMemberCollectMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsMemberCollect" id="UmsMemberCollectResult">
+        <result property="id"    column="id"    />
+        <result property="memId"    column="mem_id"    />
+        <result property="type"    column="type"    />
+        <result property="targetId"    column="target_id"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectUmsMemberCollectVo">
+        select id, mem_id, type, target_id, create_date, update_date, remarks, status, version from ums_member_collect
+    </sql>
+	
+    <select id="selectUmsMemberCollectList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMemberCollect" resultMap="UmsMemberCollectResult">
+        <include refid="selectUmsMemberCollectVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="memId != null "> and mem_id = #{memId}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="targetId != null "> and target_id = #{targetId}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsMemberCollectById" parameterType="Long" resultMap="UmsMemberCollectResult">
+        <include refid="selectUmsMemberCollectVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsMemberCollect" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMemberCollect">
+        insert into ums_member_collect
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="memId != null  ">mem_id,</if>
+			<if test="type != null  ">type,</if>
+			<if test="targetId != null  ">target_id,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="memId != null  ">#{memId},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="targetId != null  ">#{targetId},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsMemberCollect" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMemberCollect">
+        update ums_member_collect
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="memId != null  ">mem_id = #{memId},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="targetId != null  ">target_id = #{targetId},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsMemberCollectById" parameterType="Long">
+        update  ums_member_collect set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

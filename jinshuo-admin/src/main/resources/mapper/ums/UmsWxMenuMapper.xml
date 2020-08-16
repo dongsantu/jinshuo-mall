@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsWxMenuMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsWxMenu" id="UmsWxMenuResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="name"    column="name"    />
+        <result property="url"    column="url"    />
+        <result property="type"    column="type"    />
+        <result property="level"    column="level"    />
+        <result property="sort"    column="sort"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectUmsWxMenuVo">
+        select id, shop_id, parent_id, name, url, type, level, sort, create_date, update_date, remarks, status, version from ums_wx_menu
+    </sql>
+	
+    <select id="selectUmsWxMenuList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsWxMenu" resultMap="UmsWxMenuResult">
+        <include refid="selectUmsWxMenuVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="parentId != null "> and parent_id = #{parentId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="url != null  and url != '' "> and url = #{url}</if>
+             <if test="type != null  and type != '' "> and type = #{type}</if>
+             <if test="level != null "> and level = #{level}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsWxMenuById" parameterType="Long" resultMap="UmsWxMenuResult">
+        <include refid="selectUmsWxMenuVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsWxMenu" parameterType="com.jinshuo.mall.admin.domain.ums.UmsWxMenu">
+        insert into ums_wx_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="parentId != null  ">parent_id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="url != null  and url != ''  ">url,</if>
+			<if test="type != null  and type != ''  ">type,</if>
+			<if test="level != null  ">level,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="parentId != null  ">#{parentId},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="url != null  and url != ''  ">#{url},</if>
+			<if test="type != null  and type != ''  ">#{type},</if>
+			<if test="level != null  ">#{level},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsWxMenu" parameterType="com.jinshuo.mall.admin.domain.ums.UmsWxMenu">
+        update ums_wx_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="parentId != null  ">parent_id = #{parentId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="url != null  and url != ''  ">url = #{url},</if>
+            <if test="type != null  and type != ''  ">type = #{type},</if>
+            <if test="level != null  ">level = #{level},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsWxMenuById" parameterType="Long">
+        update  ums_wx_menu set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

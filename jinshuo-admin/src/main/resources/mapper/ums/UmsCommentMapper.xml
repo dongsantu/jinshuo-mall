@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsCommentMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsComment" id="UmsCommentResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="spuId"    column="spu_id"    />
+        <result property="memberId"    column="member_id"    />
+        <result property="type"    column="type"    />
+        <result property="content"    column="content"    />
+        <result property="commentStatus"    column="comment_status"    />
+        <result property="auditorId"    column="auditor_id"    />
+        <result property="auditorTime"    column="auditor_time"    />
+        <result property="auditorRemaks"    column="auditor_remaks"    />
+    </resultMap>
+	
+	<sql id="selectUmsCommentVo">
+        select id, order_id, spu_id, member_id, type, content, comment_status, auditor_id, auditor_time, auditor_remaks from ums_comment
+    </sql>
+	
+    <select id="selectUmsCommentList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsComment" resultMap="UmsCommentResult">
+        <include refid="selectUmsCommentVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="orderId != null "> and order_id = #{orderId}</if>
+             <if test="spuId != null "> and spu_id = #{spuId}</if>
+             <if test="memberId != null "> and member_id = #{memberId}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="content != null  and content != '' "> and content = #{content}</if>
+             <if test="commentStatus != null "> and comment_status = #{commentStatus}</if>
+             <if test="auditorId != null "> and auditor_id = #{auditorId}</if>
+             <if test="auditorTime != null "> and auditor_time = #{auditorTime}</if>
+             <if test="auditorRemaks != null  and auditorRemaks != '' "> and auditor_remaks = #{auditorRemaks}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsCommentById" parameterType="Long" resultMap="UmsCommentResult">
+        <include refid="selectUmsCommentVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsComment" parameterType="com.jinshuo.mall.admin.domain.ums.UmsComment">
+        insert into ums_comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="orderId != null  ">order_id,</if>
+			<if test="spuId != null  ">spu_id,</if>
+			<if test="memberId != null  ">member_id,</if>
+			<if test="type != null  ">type,</if>
+			<if test="content != null  and content != ''  ">content,</if>
+			<if test="commentStatus != null  ">comment_status,</if>
+			<if test="auditorId != null  ">auditor_id,</if>
+			<if test="auditorTime != null  ">auditor_time,</if>
+			<if test="auditorRemaks != null  and auditorRemaks != ''  ">auditor_remaks,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="orderId != null  ">#{orderId},</if>
+			<if test="spuId != null  ">#{spuId},</if>
+			<if test="memberId != null  ">#{memberId},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="content != null  and content != ''  ">#{content},</if>
+			<if test="commentStatus != null  ">#{commentStatus},</if>
+			<if test="auditorId != null  ">#{auditorId},</if>
+			<if test="auditorTime != null  ">#{auditorTime},</if>
+			<if test="auditorRemaks != null  and auditorRemaks != ''  ">#{auditorRemaks},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsComment" parameterType="com.jinshuo.mall.admin.domain.ums.UmsComment">
+        update ums_comment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null  ">order_id = #{orderId},</if>
+            <if test="spuId != null  ">spu_id = #{spuId},</if>
+            <if test="memberId != null  ">member_id = #{memberId},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="content != null  and content != ''  ">content = #{content},</if>
+            <if test="commentStatus != null  ">comment_status = #{commentStatus},</if>
+            <if test="auditorId != null  ">auditor_id = #{auditorId},</if>
+            <if test="auditorTime != null  ">auditor_time = #{auditorTime},</if>
+            <if test="auditorRemaks != null  and auditorRemaks != ''  ">auditor_remaks = #{auditorRemaks},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsCommentById" parameterType="Long">
+        update  ums_comment set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

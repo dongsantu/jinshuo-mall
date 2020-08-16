@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsMcSetMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsMcSet" id="GdsMcSetResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="picture"    column="picture"    />
+        <result property="originalPrice"    column="original_price"    />
+        <result property="price"    column="price"    />
+        <result property="riceNum"    column="rice_num"    />
+        <result property="expiryDate"    column="expiry_date"    />
+        <result property="detail"    column="detail"    />
+        <result property="salesNum"    column="sales_num"    />
+        <result property="vegetablesNum"    column="vegetables_num"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectGdsMcSetVo">
+        select id, title, picture, original_price, price, rice_num, expiry_date, detail, sales_num, vegetables_num, create_date, update_date, remarks, status, version from gds_mc_set
+    </sql>
+	
+    <select id="selectGdsMcSetList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsMcSet" resultMap="GdsMcSetResult">
+        <include refid="selectGdsMcSetVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="title != null  and title != '' "> and title = #{title}</if>
+             <if test="picture != null  and picture != '' "> and picture = #{picture}</if>
+             <if test="originalPrice != null "> and original_price = #{originalPrice}</if>
+             <if test="price != null "> and price = #{price}</if>
+             <if test="riceNum != null "> and rice_num = #{riceNum}</if>
+             <if test="expiryDate != null "> and expiry_date = #{expiryDate}</if>
+             <if test="detail != null  and detail != '' "> and detail = #{detail}</if>
+             <if test="salesNum != null "> and sales_num = #{salesNum}</if>
+             <if test="vegetablesNum != null "> and vegetables_num = #{vegetablesNum}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsMcSetById" parameterType="Long" resultMap="GdsMcSetResult">
+        <include refid="selectGdsMcSetVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsMcSet" parameterType="com.jinshuo.mall.admin.domain.gds.GdsMcSet">
+        insert into gds_mc_set
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="title != null  and title != ''  ">title,</if>
+			<if test="picture != null  and picture != ''  ">picture,</if>
+			<if test="originalPrice != null  ">original_price,</if>
+			<if test="price != null  ">price,</if>
+			<if test="riceNum != null  ">rice_num,</if>
+			<if test="expiryDate != null  ">expiry_date,</if>
+			<if test="detail != null  and detail != ''  ">detail,</if>
+			<if test="salesNum != null  ">sales_num,</if>
+			<if test="vegetablesNum != null  ">vegetables_num,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="title != null  and title != ''  ">#{title},</if>
+			<if test="picture != null  and picture != ''  ">#{picture},</if>
+			<if test="originalPrice != null  ">#{originalPrice},</if>
+			<if test="price != null  ">#{price},</if>
+			<if test="riceNum != null  ">#{riceNum},</if>
+			<if test="expiryDate != null  ">#{expiryDate},</if>
+			<if test="detail != null  and detail != ''  ">#{detail},</if>
+			<if test="salesNum != null  ">#{salesNum},</if>
+			<if test="vegetablesNum != null  ">#{vegetablesNum},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsMcSet" parameterType="com.jinshuo.mall.admin.domain.gds.GdsMcSet">
+        update gds_mc_set
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null  and title != ''  ">title = #{title},</if>
+            <if test="picture != null  and picture != ''  ">picture = #{picture},</if>
+            <if test="originalPrice != null  ">original_price = #{originalPrice},</if>
+            <if test="price != null  ">price = #{price},</if>
+            <if test="riceNum != null  ">rice_num = #{riceNum},</if>
+            <if test="expiryDate != null  ">expiry_date = #{expiryDate},</if>
+            <if test="detail != null  and detail != ''  ">detail = #{detail},</if>
+            <if test="salesNum != null  ">sales_num = #{salesNum},</if>
+            <if test="vegetablesNum != null  ">vegetables_num = #{vegetablesNum},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsMcSetById" parameterType="Long">
+        update  gds_mc_set set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

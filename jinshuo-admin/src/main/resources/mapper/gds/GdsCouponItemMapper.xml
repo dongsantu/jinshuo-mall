@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsCouponItemMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsCouponItem" id="GdsCouponItemResult">
+        <result property="id"    column="id"    />
+        <result property="couponId"    column="coupon_id"    />
+        <result property="targetId"    column="target_id"    />
+        <result property="type"    column="type"    />
+        <result property="isApply"    column="is_apply"    />
+        <result property="auditStatus"    column="audit_status"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+        <result property="createDate"    column="create_date"    />
+    </resultMap>
+	
+	<sql id="selectGdsCouponItemVo">
+        select id, coupon_id, target_id, type, is_apply, audit_status, update_date, remarks, status, version, create_date from gds_coupon_item
+    </sql>
+	
+    <select id="selectGdsCouponItemList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsCouponItem" resultMap="GdsCouponItemResult">
+        <include refid="selectGdsCouponItemVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="couponId != null "> and coupon_id = #{couponId}</if>
+             <if test="targetId != null "> and target_id = #{targetId}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="isApply != null "> and is_apply = #{isApply}</if>
+             <if test="auditStatus != null "> and audit_status = #{auditStatus}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsCouponItemById" parameterType="Long" resultMap="GdsCouponItemResult">
+        <include refid="selectGdsCouponItemVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsCouponItem" parameterType="com.jinshuo.mall.admin.domain.gds.GdsCouponItem">
+        insert into gds_coupon_item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="couponId != null  ">coupon_id,</if>
+			<if test="targetId != null  ">target_id,</if>
+			<if test="type != null  ">type,</if>
+			<if test="isApply != null  ">is_apply,</if>
+			<if test="auditStatus != null  ">audit_status,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+			<if test="createDate != null  ">create_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="couponId != null  ">#{couponId},</if>
+			<if test="targetId != null  ">#{targetId},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="isApply != null  ">#{isApply},</if>
+			<if test="auditStatus != null  ">#{auditStatus},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsCouponItem" parameterType="com.jinshuo.mall.admin.domain.gds.GdsCouponItem">
+        update gds_coupon_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="couponId != null  ">coupon_id = #{couponId},</if>
+            <if test="targetId != null  ">target_id = #{targetId},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="isApply != null  ">is_apply = #{isApply},</if>
+            <if test="auditStatus != null  ">audit_status = #{auditStatus},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsCouponItemById" parameterType="Long">
+        update  gds_coupon_item set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

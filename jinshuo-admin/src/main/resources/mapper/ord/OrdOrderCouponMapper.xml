@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ord.OrdOrderCouponMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ord.OrdOrderCoupon" id="OrdOrderCouponResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="couponReceiveId"    column="coupon_receive_id"    />
+        <result property="name"    column="name"    />
+        <result property="couponAmount"    column="coupon_amount"    />
+    </resultMap>
+	
+	<sql id="selectOrdOrderCouponVo">
+        select id, order_id, coupon_receive_id, name, coupon_amount from ord_order_coupon
+    </sql>
+	
+    <select id="selectOrdOrderCouponList" parameterType="com.jinshuo.mall.admin.domain.ord.OrdOrderCoupon" resultMap="OrdOrderCouponResult">
+        <include refid="selectOrdOrderCouponVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="orderId != null "> and order_id = #{orderId}</if>
+             <if test="couponReceiveId != null "> and coupon_receive_id = #{couponReceiveId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="couponAmount != null "> and coupon_amount = #{couponAmount}</if>
+         </where>
+    </select>
+    
+    <select id="selectOrdOrderCouponById" parameterType="Long" resultMap="OrdOrderCouponResult">
+        <include refid="selectOrdOrderCouponVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertOrdOrderCoupon" parameterType="com.jinshuo.mall.admin.domain.ord.OrdOrderCoupon">
+        insert into ord_order_coupon
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="orderId != null  ">order_id,</if>
+			<if test="couponReceiveId != null  ">coupon_receive_id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="couponAmount != null  ">coupon_amount,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="orderId != null  ">#{orderId},</if>
+			<if test="couponReceiveId != null  ">#{couponReceiveId},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="couponAmount != null  ">#{couponAmount},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateOrdOrderCoupon" parameterType="com.jinshuo.mall.admin.domain.ord.OrdOrderCoupon">
+        update ord_order_coupon
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null  ">order_id = #{orderId},</if>
+            <if test="couponReceiveId != null  ">coupon_receive_id = #{couponReceiveId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="couponAmount != null  ">coupon_amount = #{couponAmount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteOrdOrderCouponById" parameterType="Long">
+        update  ord_order_coupon set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

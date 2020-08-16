@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsFunctionMenuMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsFunctionMenu" id="UmsFunctionMenuResult">
+        <result property="id"    column="id"    />
+        <result property="functionId"    column="function_id"    />
+        <result property="menuId"    column="menu_id"    />
+    </resultMap>
+	
+	<sql id="selectUmsFunctionMenuVo">
+        select id, function_id, menu_id from ums_function_menu
+    </sql>
+	
+    <select id="selectUmsFunctionMenuList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsFunctionMenu" resultMap="UmsFunctionMenuResult">
+        <include refid="selectUmsFunctionMenuVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="functionId != null "> and function_id = #{functionId}</if>
+             <if test="menuId != null "> and menu_id = #{menuId}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsFunctionMenuById" parameterType="Long" resultMap="UmsFunctionMenuResult">
+        <include refid="selectUmsFunctionMenuVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsFunctionMenu" parameterType="com.jinshuo.mall.admin.domain.ums.UmsFunctionMenu">
+        insert into ums_function_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="functionId != null  ">function_id,</if>
+			<if test="menuId != null  ">menu_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="functionId != null  ">#{functionId},</if>
+			<if test="menuId != null  ">#{menuId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsFunctionMenu" parameterType="com.jinshuo.mall.admin.domain.ums.UmsFunctionMenu">
+        update ums_function_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="functionId != null  ">function_id = #{functionId},</if>
+            <if test="menuId != null  ">menu_id = #{menuId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsFunctionMenuById" parameterType="Long">
+        update  ums_function_menu set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

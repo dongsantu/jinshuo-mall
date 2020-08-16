@@ -1,0 +1,76 @@
+server:
+  port: 9529
+
+jwt:
+  secret: jinjiekonggu888
+  expiration: 7200000
+  token: authorization
+
+spring:
+  #数据库连接
+  datasource:
+    url: jdbc:mysql://localhost:3306/jinshuo_soft?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 202007011012aB
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/gds/*.xml,classpath:mapper/ord/*.xml,classpath:mapper/ums/*.xml
+  type-aliases-package: com.jinshuo.mall.admin.domain
+  #开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+management:
+    security:
+      enabled: false
+# 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+wx_access_token_url: https://api.weixin.qq.com/cgi-bin/token
+wx_ticket_url: https://api.weixin.qq.com/cgi-bin/ticket/getticket
+
+
+jinjieConfig:
+  URL: http://www.h5.jinjieholdings.com/#/pages/jinjie/myInfo/registered?referee_id=
+  BAIDUIPADRESS: http://api.map.baidu.com/location/ip?ak=1BqtTvcmGRnQHQ6vsZPBdVOi&ip=
+
+#微信信息配置
+wxconfig:
+      app_id: wx28d3eeba2e9a7551
+      #服务号的应用密钥
+      app_secret: f31d46f368767e4bd8beb6ca6d8c15c2
+      #服务号的配置token
+      token: XXXXXXXXXXXXXXXX
+      #商户号
+      mch_id:  1601054688
+      #API密钥
+      api_key: JINJIEKONGGU98632215698696576899
+      #签名加密方式
+      sign_type: MD5
+      #微信支付证书路径
+      cert_path: /opt/jinjiesoft/cert/apiclient_cert.p12
+      #发送模板跳转域名
+      domain: http://ym.h5.ymzby.com
+      #支付回调路径
+      noncestr: http://www.jjapi.jinjieholdings.com/jjapi/v1/public/wxController/payNotify

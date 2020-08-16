@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsSupplierMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsSupplier" id="UmsSupplierResult">
+        <result property="id"    column="id"    />
+        <result property="merchantId"    column="merchant_id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="supplierCode"    column="supplier_code"    />
+        <result property="supplierLogo"    column="supplier_logo"    />
+        <result property="supplierName"    column="supplier_name"    />
+        <result property="supplierType"    column="supplier_type"    />
+        <result property="supplierStatus"    column="supplier_status"    />
+        <result property="linkMan"    column="link_man"    />
+        <result property="linkMobile"    column="link_mobile"    />
+        <result property="province"    column="province"    />
+        <result property="city"    column="city"    />
+        <result property="disc"    column="disc"    />
+        <result property="address"    column="address"    />
+        <result property="desc"    column="desc"    />
+        <result property="loginFlag"    column="login_flag"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectUmsSupplierVo">
+        select id, merchant_id, shop_id, supplier_code, supplier_logo, supplier_name, supplier_type, supplier_status, link_man, link_mobile, province, city, disc, address, desc, login_flag, create_date, update_date, remarks, status, version from ums_supplier
+    </sql>
+	
+    <select id="selectUmsSupplierList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsSupplier" resultMap="UmsSupplierResult">
+        <include refid="selectUmsSupplierVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="merchantId != null "> and merchant_id = #{merchantId}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="supplierCode != null  and supplierCode != '' "> and supplier_code = #{supplierCode}</if>
+             <if test="supplierLogo != null  and supplierLogo != '' "> and supplier_logo = #{supplierLogo}</if>
+             <if test="supplierName != null  and supplierName != '' "> and supplier_name = #{supplierName}</if>
+             <if test="supplierType != null "> and supplier_type = #{supplierType}</if>
+             <if test="supplierStatus != null "> and supplier_status = #{supplierStatus}</if>
+             <if test="linkMan != null  and linkMan != '' "> and link_man = #{linkMan}</if>
+             <if test="linkMobile != null  and linkMobile != '' "> and link_mobile = #{linkMobile}</if>
+             <if test="province != null  and province != '' "> and province = #{province}</if>
+             <if test="city != null  and city != '' "> and city = #{city}</if>
+             <if test="disc != null  and disc != '' "> and disc = #{disc}</if>
+             <if test="address != null  and address != '' "> and address = #{address}</if>
+             <if test="desc != null  and desc != '' "> and desc = #{desc}</if>
+             <if test="loginFlag != null "> and login_flag = #{loginFlag}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsSupplierById" parameterType="Long" resultMap="UmsSupplierResult">
+        <include refid="selectUmsSupplierVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsSupplier" parameterType="com.jinshuo.mall.admin.domain.ums.UmsSupplier">
+        insert into ums_supplier
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="merchantId != null  ">merchant_id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="supplierCode != null  and supplierCode != ''  ">supplier_code,</if>
+			<if test="supplierLogo != null  and supplierLogo != ''  ">supplier_logo,</if>
+			<if test="supplierName != null  and supplierName != ''  ">supplier_name,</if>
+			<if test="supplierType != null  ">supplier_type,</if>
+			<if test="supplierStatus != null  ">supplier_status,</if>
+			<if test="linkMan != null  and linkMan != ''  ">link_man,</if>
+			<if test="linkMobile != null  and linkMobile != ''  ">link_mobile,</if>
+			<if test="province != null  and province != ''  ">province,</if>
+			<if test="city != null  and city != ''  ">city,</if>
+			<if test="disc != null  and disc != ''  ">disc,</if>
+			<if test="address != null  and address != ''  ">address,</if>
+			<if test="desc != null  and desc != ''  ">desc,</if>
+			<if test="loginFlag != null  ">login_flag,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="merchantId != null  ">#{merchantId},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="supplierCode != null  and supplierCode != ''  ">#{supplierCode},</if>
+			<if test="supplierLogo != null  and supplierLogo != ''  ">#{supplierLogo},</if>
+			<if test="supplierName != null  and supplierName != ''  ">#{supplierName},</if>
+			<if test="supplierType != null  ">#{supplierType},</if>
+			<if test="supplierStatus != null  ">#{supplierStatus},</if>
+			<if test="linkMan != null  and linkMan != ''  ">#{linkMan},</if>
+			<if test="linkMobile != null  and linkMobile != ''  ">#{linkMobile},</if>
+			<if test="province != null  and province != ''  ">#{province},</if>
+			<if test="city != null  and city != ''  ">#{city},</if>
+			<if test="disc != null  and disc != ''  ">#{disc},</if>
+			<if test="address != null  and address != ''  ">#{address},</if>
+			<if test="desc != null  and desc != ''  ">#{desc},</if>
+			<if test="loginFlag != null  ">#{loginFlag},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsSupplier" parameterType="com.jinshuo.mall.admin.domain.ums.UmsSupplier">
+        update ums_supplier
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="merchantId != null  ">merchant_id = #{merchantId},</if>
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="supplierCode != null  and supplierCode != ''  ">supplier_code = #{supplierCode},</if>
+            <if test="supplierLogo != null  and supplierLogo != ''  ">supplier_logo = #{supplierLogo},</if>
+            <if test="supplierName != null  and supplierName != ''  ">supplier_name = #{supplierName},</if>
+            <if test="supplierType != null  ">supplier_type = #{supplierType},</if>
+            <if test="supplierStatus != null  ">supplier_status = #{supplierStatus},</if>
+            <if test="linkMan != null  and linkMan != ''  ">link_man = #{linkMan},</if>
+            <if test="linkMobile != null  and linkMobile != ''  ">link_mobile = #{linkMobile},</if>
+            <if test="province != null  and province != ''  ">province = #{province},</if>
+            <if test="city != null  and city != ''  ">city = #{city},</if>
+            <if test="disc != null  and disc != ''  ">disc = #{disc},</if>
+            <if test="address != null  and address != ''  ">address = #{address},</if>
+            <if test="desc != null  and desc != ''  ">desc = #{desc},</if>
+            <if test="loginFlag != null  ">login_flag = #{loginFlag},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsSupplierById" parameterType="Long">
+        update  ums_supplier set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

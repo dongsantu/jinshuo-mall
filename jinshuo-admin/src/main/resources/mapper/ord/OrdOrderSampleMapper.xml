@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ord.OrdOrderSampleMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ord.OrdOrderSample" id="OrdOrderSampleResult">
+        <result property="id"    column="id"    />
+        <result property="sampleInfo"    column="sample_info"    />
+        <result property="sampleNo"    column="sample_no"    />
+        <result property="memberId"    column="member_id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="userAddress"    column="user_address"    />
+        <result property="userPhone"    column="user_phone"    />
+        <result property="sampleStatus"    column="sample_status"    />
+        <result property="expressCode"    column="express_code"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+        <result property="expressCompany"    column="express_company"    />
+        <result property="expressNo"    column="express_no"    />
+        <result property="expressDate"    column="express_date"    />
+    </resultMap>
+	
+	<sql id="selectOrdOrderSampleVo">
+        select id, sample_info, sample_no, member_id, shop_id, user_name, user_address, user_phone, sample_status, express_code, create_date, update_date, remarks, status, version, express_company, express_no, express_date from ord_order_sample
+    </sql>
+	
+    <select id="selectOrdOrderSampleList" parameterType="com.jinshuo.mall.admin.domain.ord.OrdOrderSample" resultMap="OrdOrderSampleResult">
+        <include refid="selectOrdOrderSampleVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="sampleInfo != null  and sampleInfo != '' "> and sample_info = #{sampleInfo}</if>
+             <if test="sampleNo != null  and sampleNo != '' "> and sample_no = #{sampleNo}</if>
+             <if test="memberId != null "> and member_id = #{memberId}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="userName != null  and userName != '' "> and user_name = #{userName}</if>
+             <if test="userAddress != null  and userAddress != '' "> and user_address = #{userAddress}</if>
+             <if test="userPhone != null  and userPhone != '' "> and user_phone = #{userPhone}</if>
+             <if test="sampleStatus != null "> and sample_status = #{sampleStatus}</if>
+             <if test="expressCode != null  and expressCode != '' "> and express_code = #{expressCode}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="expressCompany != null  and expressCompany != '' "> and express_company = #{expressCompany}</if>
+             <if test="expressNo != null  and expressNo != '' "> and express_no = #{expressNo}</if>
+             <if test="expressDate != null "> and express_date = #{expressDate}</if>
+         </where>
+    </select>
+    
+    <select id="selectOrdOrderSampleById" parameterType="Long" resultMap="OrdOrderSampleResult">
+        <include refid="selectOrdOrderSampleVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertOrdOrderSample" parameterType="com.jinshuo.mall.admin.domain.ord.OrdOrderSample">
+        insert into ord_order_sample
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="sampleInfo != null  and sampleInfo != ''  ">sample_info,</if>
+			<if test="sampleNo != null  and sampleNo != ''  ">sample_no,</if>
+			<if test="memberId != null  ">member_id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="userName != null  and userName != ''  ">user_name,</if>
+			<if test="userAddress != null  and userAddress != ''  ">user_address,</if>
+			<if test="userPhone != null  and userPhone != ''  ">user_phone,</if>
+			<if test="sampleStatus != null  ">sample_status,</if>
+			<if test="expressCode != null  and expressCode != ''  ">express_code,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+			<if test="expressCompany != null  and expressCompany != ''  ">express_company,</if>
+			<if test="expressNo != null  and expressNo != ''  ">express_no,</if>
+			<if test="expressDate != null  ">express_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="sampleInfo != null  and sampleInfo != ''  ">#{sampleInfo},</if>
+			<if test="sampleNo != null  and sampleNo != ''  ">#{sampleNo},</if>
+			<if test="memberId != null  ">#{memberId},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="userName != null  and userName != ''  ">#{userName},</if>
+			<if test="userAddress != null  and userAddress != ''  ">#{userAddress},</if>
+			<if test="userPhone != null  and userPhone != ''  ">#{userPhone},</if>
+			<if test="sampleStatus != null  ">#{sampleStatus},</if>
+			<if test="expressCode != null  and expressCode != ''  ">#{expressCode},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="expressCompany != null  and expressCompany != ''  ">#{expressCompany},</if>
+			<if test="expressNo != null  and expressNo != ''  ">#{expressNo},</if>
+			<if test="expressDate != null  ">#{expressDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateOrdOrderSample" parameterType="com.jinshuo.mall.admin.domain.ord.OrdOrderSample">
+        update ord_order_sample
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sampleInfo != null  and sampleInfo != ''  ">sample_info = #{sampleInfo},</if>
+            <if test="sampleNo != null  and sampleNo != ''  ">sample_no = #{sampleNo},</if>
+            <if test="memberId != null  ">member_id = #{memberId},</if>
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="userName != null  and userName != ''  ">user_name = #{userName},</if>
+            <if test="userAddress != null  and userAddress != ''  ">user_address = #{userAddress},</if>
+            <if test="userPhone != null  and userPhone != ''  ">user_phone = #{userPhone},</if>
+            <if test="sampleStatus != null  ">sample_status = #{sampleStatus},</if>
+            <if test="expressCode != null  and expressCode != ''  ">express_code = #{expressCode},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="expressCompany != null  and expressCompany != ''  ">express_company = #{expressCompany},</if>
+            <if test="expressNo != null  and expressNo != ''  ">express_no = #{expressNo},</if>
+            <if test="expressDate != null  ">express_date = #{expressDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteOrdOrderSampleById" parameterType="Long">
+        update  ord_order_sample set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

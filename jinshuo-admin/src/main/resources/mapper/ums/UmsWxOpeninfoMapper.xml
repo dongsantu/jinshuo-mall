@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsWxOpeninfoMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsWxOpeninfo" id="UmsWxOpeninfoResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="appid"    column="appid"    />
+        <result property="authorizerRefreshToken"    column="authorizer_refresh_token"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectUmsWxOpeninfoVo">
+        select id, shop_id, appid, authorizer_refresh_token, create_date, update_date, remarks, status, version from ums_wx_openinfo
+    </sql>
+	
+    <select id="selectUmsWxOpeninfoList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsWxOpeninfo" resultMap="UmsWxOpeninfoResult">
+        <include refid="selectUmsWxOpeninfoVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="appid != null  and appid != '' "> and appid = #{appid}</if>
+             <if test="authorizerRefreshToken != null  and authorizerRefreshToken != '' "> and authorizer_refresh_token = #{authorizerRefreshToken}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsWxOpeninfoById" parameterType="Long" resultMap="UmsWxOpeninfoResult">
+        <include refid="selectUmsWxOpeninfoVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsWxOpeninfo" parameterType="com.jinshuo.mall.admin.domain.ums.UmsWxOpeninfo">
+        insert into ums_wx_openinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="appid != null  and appid != ''  ">appid,</if>
+			<if test="authorizerRefreshToken != null  and authorizerRefreshToken != ''  ">authorizer_refresh_token,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="appid != null  and appid != ''  ">#{appid},</if>
+			<if test="authorizerRefreshToken != null  and authorizerRefreshToken != ''  ">#{authorizerRefreshToken},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsWxOpeninfo" parameterType="com.jinshuo.mall.admin.domain.ums.UmsWxOpeninfo">
+        update ums_wx_openinfo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="appid != null  and appid != ''  ">appid = #{appid},</if>
+            <if test="authorizerRefreshToken != null  and authorizerRefreshToken != ''  ">authorizer_refresh_token = #{authorizerRefreshToken},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsWxOpeninfoById" parameterType="Long">
+        update  ums_wx_openinfo set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsMemberWxMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsMemberWx" id="UmsMemberWxResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="type"    column="type"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="unionid"    column="unionid"    />
+        <result property="openid"    column="openid"    />
+        <result property="avatar"    column="avatar"    />
+        <result property="sex"    column="sex"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectUmsMemberWxVo">
+        select id, user_id, type, nickname, unionid, openid, avatar, sex, shop_id, create_date, update_date, remarks, status, version from ums_member_wx
+    </sql>
+	
+    <select id="selectUmsMemberWxList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMemberWx" resultMap="UmsMemberWxResult">
+        <include refid="selectUmsMemberWxVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="userId != null "> and user_id = #{userId}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="nickname != null  and nickname != '' "> and nickname = #{nickname}</if>
+             <if test="unionid != null  and unionid != '' "> and unionid = #{unionid}</if>
+             <if test="openid != null  and openid != '' "> and openid = #{openid}</if>
+             <if test="avatar != null  and avatar != '' "> and avatar = #{avatar}</if>
+             <if test="sex != null "> and sex = #{sex}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsMemberWxById" parameterType="Long" resultMap="UmsMemberWxResult">
+        <include refid="selectUmsMemberWxVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsMemberWx" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMemberWx">
+        insert into ums_member_wx
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="userId != null  ">user_id,</if>
+			<if test="type != null  ">type,</if>
+			<if test="nickname != null  and nickname != ''  ">nickname,</if>
+			<if test="unionid != null  and unionid != ''  ">unionid,</if>
+			<if test="openid != null  and openid != ''  ">openid,</if>
+			<if test="avatar != null  and avatar != ''  ">avatar,</if>
+			<if test="sex != null  ">sex,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="userId != null  ">#{userId},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="nickname != null  and nickname != ''  ">#{nickname},</if>
+			<if test="unionid != null  and unionid != ''  ">#{unionid},</if>
+			<if test="openid != null  and openid != ''  ">#{openid},</if>
+			<if test="avatar != null  and avatar != ''  ">#{avatar},</if>
+			<if test="sex != null  ">#{sex},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsMemberWx" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMemberWx">
+        update ums_member_wx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null  ">user_id = #{userId},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="nickname != null  and nickname != ''  ">nickname = #{nickname},</if>
+            <if test="unionid != null  and unionid != ''  ">unionid = #{unionid},</if>
+            <if test="openid != null  and openid != ''  ">openid = #{openid},</if>
+            <if test="avatar != null  and avatar != ''  ">avatar = #{avatar},</if>
+            <if test="sex != null  ">sex = #{sex},</if>
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsMemberWxById" parameterType="Long">
+        update  ums_member_wx set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsTopicMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsTopic" id="GdsTopicResult">
+        <result property="id"    column="id"    />
+        <result property="showType"    column="show_type"    />
+        <result property="code"    column="code"    />
+        <result property="type"    column="type"    />
+        <result property="sort"    column="sort"    />
+        <result property="pid"    column="pid"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="name"    column="name"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="topicStatus"    column="topic_status"    />
+        <result property="topicDesc"    column="topic_desc"    />
+        <result property="mainPicture"    column="main_picture"    />
+        <result property="signPicture"    column="sign_picture"    />
+        <result property="posterPicture"    column="poster_picture"    />
+        <result property="color"    column="color"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="version"    column="version"    />
+        <result property="headingShowFlag"    column="heading_show_flag"    />
+        <result property="headingColor"    column="heading_color"    />
+    </resultMap>
+	
+	<sql id="selectGdsTopicVo">
+        select id, show_type, code, type, sort, pid, shop_id, name, start_time, end_time, topic_status, topic_desc, main_picture, sign_picture, poster_picture, color, remarks, status, update_date, create_date, version, heading_show_flag, heading_color from gds_topic
+    </sql>
+	
+    <select id="selectGdsTopicList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsTopic" resultMap="GdsTopicResult">
+        <include refid="selectGdsTopicVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="showType != null "> and show_type = #{showType}</if>
+             <if test="code != null  and code != '' "> and code = #{code}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="pid != null "> and pid = #{pid}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="startTime != null "> and start_time = #{startTime}</if>
+             <if test="endTime != null "> and end_time = #{endTime}</if>
+             <if test="topicStatus != null "> and topic_status = #{topicStatus}</if>
+             <if test="topicDesc != null  and topicDesc != '' "> and topic_desc = #{topicDesc}</if>
+             <if test="mainPicture != null  and mainPicture != '' "> and main_picture = #{mainPicture}</if>
+             <if test="signPicture != null  and signPicture != '' "> and sign_picture = #{signPicture}</if>
+             <if test="posterPicture != null  and posterPicture != '' "> and poster_picture = #{posterPicture}</if>
+             <if test="color != null  and color != '' "> and color = #{color}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="headingShowFlag != null "> and heading_show_flag = #{headingShowFlag}</if>
+             <if test="headingColor != null  and headingColor != '' "> and heading_color = #{headingColor}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsTopicById" parameterType="Long" resultMap="GdsTopicResult">
+        <include refid="selectGdsTopicVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsTopic" parameterType="com.jinshuo.mall.admin.domain.gds.GdsTopic">
+        insert into gds_topic
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="showType != null  ">show_type,</if>
+			<if test="code != null  and code != ''  ">code,</if>
+			<if test="type != null  ">type,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="pid != null  ">pid,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="startTime != null  ">start_time,</if>
+			<if test="endTime != null  ">end_time,</if>
+			<if test="topicStatus != null  ">topic_status,</if>
+			<if test="topicDesc != null  and topicDesc != ''  ">topic_desc,</if>
+			<if test="mainPicture != null  and mainPicture != ''  ">main_picture,</if>
+			<if test="signPicture != null  and signPicture != ''  ">sign_picture,</if>
+			<if test="posterPicture != null  and posterPicture != ''  ">poster_picture,</if>
+			<if test="color != null  and color != ''  ">color,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="version != null  ">version,</if>
+			<if test="headingShowFlag != null  ">heading_show_flag,</if>
+			<if test="headingColor != null  and headingColor != ''  ">heading_color,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="showType != null  ">#{showType},</if>
+			<if test="code != null  and code != ''  ">#{code},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="pid != null  ">#{pid},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="startTime != null  ">#{startTime},</if>
+			<if test="endTime != null  ">#{endTime},</if>
+			<if test="topicStatus != null  ">#{topicStatus},</if>
+			<if test="topicDesc != null  and topicDesc != ''  ">#{topicDesc},</if>
+			<if test="mainPicture != null  and mainPicture != ''  ">#{mainPicture},</if>
+			<if test="signPicture != null  and signPicture != ''  ">#{signPicture},</if>
+			<if test="posterPicture != null  and posterPicture != ''  ">#{posterPicture},</if>
+			<if test="color != null  and color != ''  ">#{color},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="headingShowFlag != null  ">#{headingShowFlag},</if>
+			<if test="headingColor != null  and headingColor != ''  ">#{headingColor},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsTopic" parameterType="com.jinshuo.mall.admin.domain.gds.GdsTopic">
+        update gds_topic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="showType != null  ">show_type = #{showType},</if>
+            <if test="code != null  and code != ''  ">code = #{code},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="pid != null  ">pid = #{pid},</if>
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="startTime != null  ">start_time = #{startTime},</if>
+            <if test="endTime != null  ">end_time = #{endTime},</if>
+            <if test="topicStatus != null  ">topic_status = #{topicStatus},</if>
+            <if test="topicDesc != null  and topicDesc != ''  ">topic_desc = #{topicDesc},</if>
+            <if test="mainPicture != null  and mainPicture != ''  ">main_picture = #{mainPicture},</if>
+            <if test="signPicture != null  and signPicture != ''  ">sign_picture = #{signPicture},</if>
+            <if test="posterPicture != null  and posterPicture != ''  ">poster_picture = #{posterPicture},</if>
+            <if test="color != null  and color != ''  ">color = #{color},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="headingShowFlag != null  ">heading_show_flag = #{headingShowFlag},</if>
+            <if test="headingColor != null  and headingColor != ''  ">heading_color = #{headingColor},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsTopicById" parameterType="Long">
+        update  gds_topic set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

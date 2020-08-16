@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsMerchantMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsMerchant" id="UmsMerchantResult">
+        <result property="id"    column="id"    />
+        <result property="merchantStatus"    column="merchant_status"    />
+        <result property="merchantType"    column="merchant_type"    />
+        <result property="name"    column="name"    />
+        <result property="corporate"    column="corporate"    />
+        <result property="registCapital"    column="regist_capital"    />
+        <result property="openDate"    column="open_date"    />
+        <result property="approvedDate"    column="approved_date"    />
+        <result property="unifiedCreditCode"    column="unified_credit_code"    />
+        <result property="organizationCode"    column="organization_code"    />
+        <result property="taxpayerCode"    column="taxpayer_code"    />
+        <result property="registrationAuthority"    column="registration_authority"    />
+        <result property="enterpriseType"    column="enterprise_type"    />
+        <result property="operatingPeriod"    column="operating_period"    />
+        <result property="paidInCapital"    column="paid_in_capital"    />
+        <result property="adress"    column="adress"    />
+        <result property="linkMan"    column="link_man"    />
+        <result property="linkMobile"    column="link_mobile"    />
+        <result property="phone"    column="phone"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="remarks"    column="remarks"    />
+    </resultMap>
+	
+	<sql id="selectUmsMerchantVo">
+        select id, merchant_status, merchant_type, name, corporate, regist_capital, open_date, approved_date, unified_credit_code, organization_code, taxpayer_code, registration_authority, enterprise_type, operating_period, paid_in_capital, adress, link_man, link_mobile, phone, status, version, update_date, create_date, remarks from ums_merchant
+    </sql>
+	
+    <select id="selectUmsMerchantList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMerchant" resultMap="UmsMerchantResult">
+        <include refid="selectUmsMerchantVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="merchantStatus != null "> and merchant_status = #{merchantStatus}</if>
+             <if test="merchantType != null "> and merchant_type = #{merchantType}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="corporate != null  and corporate != '' "> and corporate = #{corporate}</if>
+             <if test="registCapital != null "> and regist_capital = #{registCapital}</if>
+             <if test="openDate != null "> and open_date = #{openDate}</if>
+             <if test="approvedDate != null "> and approved_date = #{approvedDate}</if>
+             <if test="unifiedCreditCode != null  and unifiedCreditCode != '' "> and unified_credit_code = #{unifiedCreditCode}</if>
+             <if test="organizationCode != null  and organizationCode != '' "> and organization_code = #{organizationCode}</if>
+             <if test="taxpayerCode != null  and taxpayerCode != '' "> and taxpayer_code = #{taxpayerCode}</if>
+             <if test="registrationAuthority != null  and registrationAuthority != '' "> and registration_authority = #{registrationAuthority}</if>
+             <if test="enterpriseType != null  and enterpriseType != '' "> and enterprise_type = #{enterpriseType}</if>
+             <if test="operatingPeriod != null  and operatingPeriod != '' "> and operating_period = #{operatingPeriod}</if>
+             <if test="paidInCapital != null "> and paid_in_capital = #{paidInCapital}</if>
+             <if test="adress != null  and adress != '' "> and adress = #{adress}</if>
+             <if test="linkMan != null  and linkMan != '' "> and link_man = #{linkMan}</if>
+             <if test="linkMobile != null  and linkMobile != '' "> and link_mobile = #{linkMobile}</if>
+             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsMerchantById" parameterType="Long" resultMap="UmsMerchantResult">
+        <include refid="selectUmsMerchantVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsMerchant" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMerchant">
+        insert into ums_merchant
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="merchantStatus != null  ">merchant_status,</if>
+			<if test="merchantType != null  ">merchant_type,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="corporate != null  and corporate != ''  ">corporate,</if>
+			<if test="registCapital != null  ">regist_capital,</if>
+			<if test="openDate != null  ">open_date,</if>
+			<if test="approvedDate != null  ">approved_date,</if>
+			<if test="unifiedCreditCode != null  and unifiedCreditCode != ''  ">unified_credit_code,</if>
+			<if test="organizationCode != null  and organizationCode != ''  ">organization_code,</if>
+			<if test="taxpayerCode != null  and taxpayerCode != ''  ">taxpayer_code,</if>
+			<if test="registrationAuthority != null  and registrationAuthority != ''  ">registration_authority,</if>
+			<if test="enterpriseType != null  and enterpriseType != ''  ">enterprise_type,</if>
+			<if test="operatingPeriod != null  and operatingPeriod != ''  ">operating_period,</if>
+			<if test="paidInCapital != null  ">paid_in_capital,</if>
+			<if test="adress != null  and adress != ''  ">adress,</if>
+			<if test="linkMan != null  and linkMan != ''  ">link_man,</if>
+			<if test="linkMobile != null  and linkMobile != ''  ">link_mobile,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="merchantStatus != null  ">#{merchantStatus},</if>
+			<if test="merchantType != null  ">#{merchantType},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="corporate != null  and corporate != ''  ">#{corporate},</if>
+			<if test="registCapital != null  ">#{registCapital},</if>
+			<if test="openDate != null  ">#{openDate},</if>
+			<if test="approvedDate != null  ">#{approvedDate},</if>
+			<if test="unifiedCreditCode != null  and unifiedCreditCode != ''  ">#{unifiedCreditCode},</if>
+			<if test="organizationCode != null  and organizationCode != ''  ">#{organizationCode},</if>
+			<if test="taxpayerCode != null  and taxpayerCode != ''  ">#{taxpayerCode},</if>
+			<if test="registrationAuthority != null  and registrationAuthority != ''  ">#{registrationAuthority},</if>
+			<if test="enterpriseType != null  and enterpriseType != ''  ">#{enterpriseType},</if>
+			<if test="operatingPeriod != null  and operatingPeriod != ''  ">#{operatingPeriod},</if>
+			<if test="paidInCapital != null  ">#{paidInCapital},</if>
+			<if test="adress != null  and adress != ''  ">#{adress},</if>
+			<if test="linkMan != null  and linkMan != ''  ">#{linkMan},</if>
+			<if test="linkMobile != null  and linkMobile != ''  ">#{linkMobile},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsMerchant" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMerchant">
+        update ums_merchant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="merchantStatus != null  ">merchant_status = #{merchantStatus},</if>
+            <if test="merchantType != null  ">merchant_type = #{merchantType},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="corporate != null  and corporate != ''  ">corporate = #{corporate},</if>
+            <if test="registCapital != null  ">regist_capital = #{registCapital},</if>
+            <if test="openDate != null  ">open_date = #{openDate},</if>
+            <if test="approvedDate != null  ">approved_date = #{approvedDate},</if>
+            <if test="unifiedCreditCode != null  and unifiedCreditCode != ''  ">unified_credit_code = #{unifiedCreditCode},</if>
+            <if test="organizationCode != null  and organizationCode != ''  ">organization_code = #{organizationCode},</if>
+            <if test="taxpayerCode != null  and taxpayerCode != ''  ">taxpayer_code = #{taxpayerCode},</if>
+            <if test="registrationAuthority != null  and registrationAuthority != ''  ">registration_authority = #{registrationAuthority},</if>
+            <if test="enterpriseType != null  and enterpriseType != ''  ">enterprise_type = #{enterpriseType},</if>
+            <if test="operatingPeriod != null  and operatingPeriod != ''  ">operating_period = #{operatingPeriod},</if>
+            <if test="paidInCapital != null  ">paid_in_capital = #{paidInCapital},</if>
+            <if test="adress != null  and adress != ''  ">adress = #{adress},</if>
+            <if test="linkMan != null  and linkMan != ''  ">link_man = #{linkMan},</if>
+            <if test="linkMobile != null  and linkMobile != ''  ">link_mobile = #{linkMobile},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsMerchantById" parameterType="Long">
+        update  ums_merchant set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

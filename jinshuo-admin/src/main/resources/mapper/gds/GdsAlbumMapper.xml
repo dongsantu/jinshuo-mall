@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsAlbumMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsAlbum" id="GdsAlbumResult">
+        <result property="id"    column="id"    />
+        <result property="spuId"    column="spu_id"    />
+        <result property="skuId"    column="sku_id"    />
+        <result property="url"    column="url"    />
+        <result property="type"    column="type"    />
+        <result property="sort"    column="sort"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectGdsAlbumVo">
+        select id, spu_id, sku_id, url, type, sort, create_date, update_date, remarks, status, version from gds_album
+    </sql>
+	
+    <select id="selectGdsAlbumList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsAlbum" resultMap="GdsAlbumResult">
+        <include refid="selectGdsAlbumVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="spuId != null "> and spu_id = #{spuId}</if>
+             <if test="skuId != null "> and sku_id = #{skuId}</if>
+             <if test="url != null  and url != '' "> and url = #{url}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsAlbumById" parameterType="Long" resultMap="GdsAlbumResult">
+        <include refid="selectGdsAlbumVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsAlbum" parameterType="com.jinshuo.mall.admin.domain.gds.GdsAlbum">
+        insert into gds_album
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="spuId != null  ">spu_id,</if>
+			<if test="skuId != null  ">sku_id,</if>
+			<if test="url != null  and url != ''  ">url,</if>
+			<if test="type != null  ">type,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="spuId != null  ">#{spuId},</if>
+			<if test="skuId != null  ">#{skuId},</if>
+			<if test="url != null  and url != ''  ">#{url},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsAlbum" parameterType="com.jinshuo.mall.admin.domain.gds.GdsAlbum">
+        update gds_album
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="spuId != null  ">spu_id = #{spuId},</if>
+            <if test="skuId != null  ">sku_id = #{skuId},</if>
+            <if test="url != null  and url != ''  ">url = #{url},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsAlbumById" parameterType="Long">
+        update  gds_album set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

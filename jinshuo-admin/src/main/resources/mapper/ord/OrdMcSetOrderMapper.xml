@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ord.OrdMcSetOrderMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ord.OrdMcSetOrder" id="OrdMcSetOrderResult">
+        <result property="id"    column="id"    />
+        <result property="setId"    column="set_id"    />
+        <result property="mcName"    column="mc_name"    />
+        <result property="mcPic"    column="mc_pic"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="amount"    column="amount"    />
+        <result property="riceNum"    column="rice_num"    />
+        <result property="vegetablesNum"    column="vegetables_num"    />
+        <result property="riceNumUsed"    column="rice_num_used"    />
+        <result property="vegetablesNumUsed"    column="vegetables_num_used"    />
+        <result property="address"    column="address"    />
+        <result property="linkMan"    column="link_man"    />
+        <result property="linkPhone"    column="link_phone"    />
+        <result property="orderDate"    column="order_date"    />
+        <result property="orderStatus"    column="order_status"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectOrdMcSetOrderVo">
+        select id, set_id, mc_name, mc_pic, order_no, shop_id, user_id, amount, rice_num, vegetables_num, rice_num_used, vegetables_num_used, address, link_man, link_phone, order_date, order_status, create_date, update_date, remarks, status, version from ord_mc_set_order
+    </sql>
+	
+    <select id="selectOrdMcSetOrderList" parameterType="com.jinshuo.mall.admin.domain.ord.OrdMcSetOrder" resultMap="OrdMcSetOrderResult">
+        <include refid="selectOrdMcSetOrderVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="setId != null "> and set_id = #{setId}</if>
+             <if test="mcName != null  and mcName != '' "> and mc_name = #{mcName}</if>
+             <if test="mcPic != null  and mcPic != '' "> and mc_pic = #{mcPic}</if>
+             <if test="orderNo != null  and orderNo != '' "> and order_no = #{orderNo}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="userId != null "> and user_id = #{userId}</if>
+             <if test="amount != null "> and amount = #{amount}</if>
+             <if test="riceNum != null "> and rice_num = #{riceNum}</if>
+             <if test="vegetablesNum != null "> and vegetables_num = #{vegetablesNum}</if>
+             <if test="riceNumUsed != null "> and rice_num_used = #{riceNumUsed}</if>
+             <if test="vegetablesNumUsed != null "> and vegetables_num_used = #{vegetablesNumUsed}</if>
+             <if test="address != null  and address != '' "> and address = #{address}</if>
+             <if test="linkMan != null  and linkMan != '' "> and link_man = #{linkMan}</if>
+             <if test="linkPhone != null  and linkPhone != '' "> and link_phone = #{linkPhone}</if>
+             <if test="orderDate != null "> and order_date = #{orderDate}</if>
+             <if test="orderStatus != null "> and order_status = #{orderStatus}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectOrdMcSetOrderById" parameterType="Long" resultMap="OrdMcSetOrderResult">
+        <include refid="selectOrdMcSetOrderVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertOrdMcSetOrder" parameterType="com.jinshuo.mall.admin.domain.ord.OrdMcSetOrder">
+        insert into ord_mc_set_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="setId != null  ">set_id,</if>
+			<if test="mcName != null  and mcName != ''  ">mc_name,</if>
+			<if test="mcPic != null  and mcPic != ''  ">mc_pic,</if>
+			<if test="orderNo != null  and orderNo != ''  ">order_no,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="userId != null  ">user_id,</if>
+			<if test="amount != null  ">amount,</if>
+			<if test="riceNum != null  ">rice_num,</if>
+			<if test="vegetablesNum != null  ">vegetables_num,</if>
+			<if test="riceNumUsed != null  ">rice_num_used,</if>
+			<if test="vegetablesNumUsed != null  ">vegetables_num_used,</if>
+			<if test="address != null  and address != ''  ">address,</if>
+			<if test="linkMan != null  and linkMan != ''  ">link_man,</if>
+			<if test="linkPhone != null  and linkPhone != ''  ">link_phone,</if>
+			<if test="orderDate != null  ">order_date,</if>
+			<if test="orderStatus != null  ">order_status,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="setId != null  ">#{setId},</if>
+			<if test="mcName != null  and mcName != ''  ">#{mcName},</if>
+			<if test="mcPic != null  and mcPic != ''  ">#{mcPic},</if>
+			<if test="orderNo != null  and orderNo != ''  ">#{orderNo},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="userId != null  ">#{userId},</if>
+			<if test="amount != null  ">#{amount},</if>
+			<if test="riceNum != null  ">#{riceNum},</if>
+			<if test="vegetablesNum != null  ">#{vegetablesNum},</if>
+			<if test="riceNumUsed != null  ">#{riceNumUsed},</if>
+			<if test="vegetablesNumUsed != null  ">#{vegetablesNumUsed},</if>
+			<if test="address != null  and address != ''  ">#{address},</if>
+			<if test="linkMan != null  and linkMan != ''  ">#{linkMan},</if>
+			<if test="linkPhone != null  and linkPhone != ''  ">#{linkPhone},</if>
+			<if test="orderDate != null  ">#{orderDate},</if>
+			<if test="orderStatus != null  ">#{orderStatus},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateOrdMcSetOrder" parameterType="com.jinshuo.mall.admin.domain.ord.OrdMcSetOrder">
+        update ord_mc_set_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="setId != null  ">set_id = #{setId},</if>
+            <if test="mcName != null  and mcName != ''  ">mc_name = #{mcName},</if>
+            <if test="mcPic != null  and mcPic != ''  ">mc_pic = #{mcPic},</if>
+            <if test="orderNo != null  and orderNo != ''  ">order_no = #{orderNo},</if>
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="userId != null  ">user_id = #{userId},</if>
+            <if test="amount != null  ">amount = #{amount},</if>
+            <if test="riceNum != null  ">rice_num = #{riceNum},</if>
+            <if test="vegetablesNum != null  ">vegetables_num = #{vegetablesNum},</if>
+            <if test="riceNumUsed != null  ">rice_num_used = #{riceNumUsed},</if>
+            <if test="vegetablesNumUsed != null  ">vegetables_num_used = #{vegetablesNumUsed},</if>
+            <if test="address != null  and address != ''  ">address = #{address},</if>
+            <if test="linkMan != null  and linkMan != ''  ">link_man = #{linkMan},</if>
+            <if test="linkPhone != null  and linkPhone != ''  ">link_phone = #{linkPhone},</if>
+            <if test="orderDate != null  ">order_date = #{orderDate},</if>
+            <if test="orderStatus != null  ">order_status = #{orderStatus},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteOrdMcSetOrderById" parameterType="Long">
+        update  ord_mc_set_order set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

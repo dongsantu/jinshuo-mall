@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsSkuAttributeAndOptionMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsSkuAttributeAndOption" id="GdsSkuAttributeAndOptionResult">
+        <result property="id"    column="id"    />
+        <result property="skuId"    column="sku_id"    />
+        <result property="specId"    column="spec_id"    />
+        <result property="specOptionId"    column="spec_option_id"    />
+        <result property="sort"    column="sort"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectGdsSkuAttributeAndOptionVo">
+        select id, sku_id, spec_id, spec_option_id, sort, create_date, update_date, remarks, status, version from gds_sku_attribute_and_option
+    </sql>
+	
+    <select id="selectGdsSkuAttributeAndOptionList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSkuAttributeAndOption" resultMap="GdsSkuAttributeAndOptionResult">
+        <include refid="selectGdsSkuAttributeAndOptionVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="skuId != null "> and sku_id = #{skuId}</if>
+             <if test="specId != null "> and spec_id = #{specId}</if>
+             <if test="specOptionId != null "> and spec_option_id = #{specOptionId}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsSkuAttributeAndOptionById" parameterType="Long" resultMap="GdsSkuAttributeAndOptionResult">
+        <include refid="selectGdsSkuAttributeAndOptionVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsSkuAttributeAndOption" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSkuAttributeAndOption">
+        insert into gds_sku_attribute_and_option
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="skuId != null  ">sku_id,</if>
+			<if test="specId != null  ">spec_id,</if>
+			<if test="specOptionId != null  ">spec_option_id,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="skuId != null  ">#{skuId},</if>
+			<if test="specId != null  ">#{specId},</if>
+			<if test="specOptionId != null  ">#{specOptionId},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsSkuAttributeAndOption" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSkuAttributeAndOption">
+        update gds_sku_attribute_and_option
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="skuId != null  ">sku_id = #{skuId},</if>
+            <if test="specId != null  ">spec_id = #{specId},</if>
+            <if test="specOptionId != null  ">spec_option_id = #{specOptionId},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsSkuAttributeAndOptionById" parameterType="Long">
+        update  gds_sku_attribute_and_option set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

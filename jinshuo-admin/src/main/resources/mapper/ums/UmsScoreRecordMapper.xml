@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsScoreRecordMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsScoreRecord" id="UmsScoreRecordResult">
+        <result property="id"    column="id"    />
+        <result property="memId"    column="mem_id"    />
+        <result property="tragetType"    column="traget_type"    />
+        <result property="tragetId"    column="traget_id"    />
+        <result property="type"    column="type"    />
+        <result property="score"    column="score"    />
+        <result property="expendScosourceType"    column="expend_scosource_type"    />
+        <result property="sourceMemo"    column="source_memo"    />
+    </resultMap>
+	
+	<sql id="selectUmsScoreRecordVo">
+        select id, mem_id, traget_type, traget_id, type, score, expend_scosource_type, source_memo from ums_score_record
+    </sql>
+	
+    <select id="selectUmsScoreRecordList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsScoreRecord" resultMap="UmsScoreRecordResult">
+        <include refid="selectUmsScoreRecordVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="memId != null "> and mem_id = #{memId}</if>
+             <if test="tragetType != null "> and traget_type = #{tragetType}</if>
+             <if test="tragetId != null "> and traget_id = #{tragetId}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="score != null "> and score = #{score}</if>
+             <if test="expendScosourceType != null "> and expend_scosource_type = #{expendScosourceType}</if>
+             <if test="sourceMemo != null  and sourceMemo != '' "> and source_memo = #{sourceMemo}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsScoreRecordById" parameterType="Long" resultMap="UmsScoreRecordResult">
+        <include refid="selectUmsScoreRecordVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsScoreRecord" parameterType="com.jinshuo.mall.admin.domain.ums.UmsScoreRecord">
+        insert into ums_score_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="memId != null  ">mem_id,</if>
+			<if test="tragetType != null  ">traget_type,</if>
+			<if test="tragetId != null  ">traget_id,</if>
+			<if test="type != null  ">type,</if>
+			<if test="score != null  ">score,</if>
+			<if test="expendScosourceType != null  ">expend_scosource_type,</if>
+			<if test="sourceMemo != null  and sourceMemo != ''  ">source_memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="memId != null  ">#{memId},</if>
+			<if test="tragetType != null  ">#{tragetType},</if>
+			<if test="tragetId != null  ">#{tragetId},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="score != null  ">#{score},</if>
+			<if test="expendScosourceType != null  ">#{expendScosourceType},</if>
+			<if test="sourceMemo != null  and sourceMemo != ''  ">#{sourceMemo},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsScoreRecord" parameterType="com.jinshuo.mall.admin.domain.ums.UmsScoreRecord">
+        update ums_score_record
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="memId != null  ">mem_id = #{memId},</if>
+            <if test="tragetType != null  ">traget_type = #{tragetType},</if>
+            <if test="tragetId != null  ">traget_id = #{tragetId},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="score != null  ">score = #{score},</if>
+            <if test="expendScosourceType != null  ">expend_scosource_type = #{expendScosourceType},</if>
+            <if test="sourceMemo != null  and sourceMemo != ''  ">source_memo = #{sourceMemo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsScoreRecordById" parameterType="Long">
+        update  ums_score_record set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

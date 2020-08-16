@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsSpuMapper">
+
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsSpu" id="GdsSpuResult">
+        <result property="id" column="id"/>
+        <result property="spuName" column="spu_name"/>
+        <result property="goodsStatus" column="goods_status"/>
+        <result property="upTime" column="up_time"/>
+        <result property="downTime" column="down_time"/>
+        <result property="isShowSell" column="is_show_sell"/>
+        <result property="isScareBuy" column="is_scare_buy"/>
+        <result property="buyStartDate" column="buy_start_date"/>
+        <result property="buyEndDate" column="buy_end_date"/>
+        <result property="price" column="price"/>
+        <result property="marketPrice" column="market_price"/>
+        <result property="costPrice" column="cost_price"/>
+        <result property="stock" column="stock"/>
+        <result property="warningStock" column="warning_stock"/>
+        <result property="virtualSales" column="virtual_sales"/>
+        <result property="realSales" column="real_sales"/>
+        <result property="isHot" column="is_hot"/>
+        <result property="isDis" column="is_dis"/>
+        <result property="sort" column="sort"/>
+        <result property="singleSku" column="single_sku"/>
+        <result property="poster" column="poster"/>
+        <result property="sketch" column="sketch"/>
+        <result property="pictureUrl" column="picture_url"/>
+        <result property="supplierId" column="supplier_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="featureId" column="feature_id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="shopId" column="shop_id"/>
+        <result property="typeId" column="type_id"/>
+        <result property="brandId" column="brand_id"/>
+        <result property="groudId" column="groud_id"/>
+        <result property="tag" column="tag"/>
+        <result property="spuCode" column="spu_code"/>
+        <result property="unit" column="unit"/>
+        <result property="isIntegral" column="is_integral"/>
+        <result property="integral" column="integral"/>
+        <result property="services" column="services"/>
+        <result property="areaNames" column="area_names"/>
+        <result property="areaName" column="area_name"/>
+        <result property="isSendcode" column="is_sendcode"/>
+        <result property="reserveAddress" column="reserve_address"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="remarks" column="remarks"/>
+        <result property="status" column="status"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+    <sql id="selectGdsSpuVo">
+        select id, spu_name, goods_status, up_time, down_time, is_show_sell, is_scare_buy, buy_start_date, buy_end_date, price, market_price, cost_price, stock, warning_stock, virtual_sales, real_sales, is_hot, is_dis, sort, single_sku, poster, sketch, picture_url, supplier_id, category_id, feature_id, merchant_id, shop_id, type_id, brand_id, groud_id, tag, spu_code, unit, is_integral, integral, services, area_names, area_name, is_sendcode, reserve_address, audit_status, update_date, remarks, status, version, create_date from gds_spu
+    </sql>
+
+    <select id="selectGdsSpuList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSpu" resultMap="GdsSpuResult">
+        <include refid="selectGdsSpuVo"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="spuName != null  and spuName != '' ">and spu_name = #{spuName}</if>
+            <if test="goodsStatus != null ">and goods_status = #{goodsStatus}</if>
+            <if test="upTime != null ">and up_time = #{upTime}</if>
+            <if test="downTime != null ">and down_time = #{downTime}</if>
+            <if test="isShowSell != null ">and is_show_sell = #{isShowSell}</if>
+            <if test="isScareBuy != null ">and is_scare_buy = #{isScareBuy}</if>
+            <if test="buyStartDate != null ">and buy_start_date = #{buyStartDate}</if>
+            <if test="buyEndDate != null ">and buy_end_date = #{buyEndDate}</if>
+            <if test="price != null ">and price = #{price}</if>
+            <if test="marketPrice != null ">and market_price = #{marketPrice}</if>
+            <if test="costPrice != null ">and cost_price = #{costPrice}</if>
+            <if test="stock != null ">and stock = #{stock}</if>
+            <if test="warningStock != null ">and warning_stock = #{warningStock}</if>
+            <if test="virtualSales != null ">and virtual_sales = #{virtualSales}</if>
+            <if test="realSales != null ">and real_sales = #{realSales}</if>
+            <if test="isHot != null ">and is_hot = #{isHot}</if>
+            <if test="isDis != null ">and is_dis = #{isDis}</if>
+            <if test="sort != null ">and sort = #{sort}</if>
+            <if test="singleSku != null ">and single_sku = #{singleSku}</if>
+            <if test="poster != null  and poster != '' ">and poster = #{poster}</if>
+            <if test="sketch != null  and sketch != '' ">and sketch = #{sketch}</if>
+            <if test="pictureUrl != null  and pictureUrl != '' ">and picture_url = #{pictureUrl}</if>
+            <if test="supplierId != null ">and supplier_id = #{supplierId}</if>
+            <if test="categoryId != null  and categoryId != '' ">and category_id = #{categoryId}</if>
+            <if test="featureId != null ">and feature_id = #{featureId}</if>
+            <if test="merchantId != null ">and merchant_id = #{merchantId}</if>
+            <if test="shopId != null ">and shop_id = #{shopId}</if>
+            <if test="typeId != null ">and type_id = #{typeId}</if>
+            <if test="brandId != null ">and brand_id = #{brandId}</if>
+            <if test="groudId != null ">and groud_id = #{groudId}</if>
+            <if test="tag != null  and tag != '' ">and tag = #{tag}</if>
+            <if test="spuCode != null  and spuCode != '' ">and spu_code = #{spuCode}</if>
+            <if test="unit != null  and unit != '' ">and unit = #{unit}</if>
+            <if test="isIntegral != null ">and is_integral = #{isIntegral}</if>
+            <if test="integral != null ">and integral = #{integral}</if>
+            <if test="services != null  and services != '' ">and services = #{services}</if>
+            <if test="areaNames != null  and areaNames != '' ">and area_names = #{areaNames}</if>
+            <if test="areaName != null  and areaName != '' ">and area_name = #{areaName}</if>
+            <if test="isSendcode != null ">and is_sendcode = #{isSendcode}</if>
+            <if test="reserveAddress != null  and reserveAddress != '' ">and reserve_address = #{reserveAddress}</if>
+            <if test="auditStatus != null ">and audit_status = #{auditStatus}</if>
+            <if test="updateDate != null ">and update_date = #{updateDate}</if>
+            <if test="remarks != null  and remarks != '' ">and remarks = #{remarks}</if>
+            <if test="status != null ">and status = #{status}</if>
+            <if test="version != null ">and version = #{version}</if>
+            <if test="createDate != null ">and create_date = #{createDate}</if>
+        </where>
+    </select>
+
+    <select id="selectGdsSpuById" parameterType="Long" resultMap="GdsSpuResult">
+        <include refid="selectGdsSpuVo"/>
+        where status = 0 and id = #{id}
+    </select>
+
+    <insert id="insertGdsSpu" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSpu">
+        insert into gds_spu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  ">id,</if>
+            <if test="spuName != null  and spuName != ''  ">spu_name,</if>
+            <if test="goodsStatus != null  ">goods_status,</if>
+            <if test="upTime != null  ">up_time,</if>
+            <if test="downTime != null  ">down_time,</if>
+            <if test="isShowSell != null  ">is_show_sell,</if>
+            <if test="isScareBuy != null  ">is_scare_buy,</if>
+            <if test="buyStartDate != null  ">buy_start_date,</if>
+            <if test="buyEndDate != null  ">buy_end_date,</if>
+            <if test="price != null  ">price,</if>
+            <if test="marketPrice != null  ">market_price,</if>
+            <if test="costPrice != null  ">cost_price,</if>
+            <if test="stock != null  ">stock,</if>
+            <if test="warningStock != null  ">warning_stock,</if>
+            <if test="virtualSales != null  ">virtual_sales,</if>
+            <if test="realSales != null  ">real_sales,</if>
+            <if test="isHot != null  ">is_hot,</if>
+            <if test="isDis != null  ">is_dis,</if>
+            <if test="sort != null  ">sort,</if>
+            <if test="singleSku != null  ">single_sku,</if>
+            <if test="poster != null  and poster != ''  ">poster,</if>
+            <if test="sketch != null  and sketch != ''  ">sketch,</if>
+            <if test="pictureUrl != null  and pictureUrl != ''  ">picture_url,</if>
+            <if test="supplierId != null  ">supplier_id,</if>
+            <if test="categoryId != null  and categoryId != ''  ">category_id,</if>
+            <if test="featureId != null  ">feature_id,</if>
+            <if test="merchantId != null  ">merchant_id,</if>
+            <if test="shopId != null  ">shop_id,</if>
+            <if test="typeId != null  ">type_id,</if>
+            <if test="brandId != null  ">brand_id,</if>
+            <if test="groudId != null  ">groud_id,</if>
+            <if test="tag != null  and tag != ''  ">tag,</if>
+            <if test="spuCode != null  and spuCode != ''  ">spu_code,</if>
+            <if test="unit != null  and unit != ''  ">unit,</if>
+            <if test="isIntegral != null  ">is_integral,</if>
+            <if test="integral != null  ">integral,</if>
+            <if test="services != null  and services != ''  ">services,</if>
+            <if test="areaNames != null  and areaNames != ''  ">area_names,</if>
+            <if test="areaName != null  and areaName != ''  ">area_name,</if>
+            <if test="isSendcode != null  ">is_sendcode,</if>
+            <if test="reserveAddress != null  and reserveAddress != ''  ">reserve_address,</if>
+            <if test="auditStatus != null  ">audit_status,</if>
+            <if test="updateDate != null  ">update_date,</if>
+            <if test="remarks != null  and remarks != ''  ">remarks,</if>
+            <if test="status != null  ">status,</if>
+            <if test="version != null  ">version,</if>
+            <if test="createDate != null  ">create_date,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  ">#{id},</if>
+            <if test="spuName != null  and spuName != ''  ">#{spuName},</if>
+            <if test="goodsStatus != null  ">#{goodsStatus},</if>
+            <if test="upTime != null  ">#{upTime},</if>
+            <if test="downTime != null  ">#{downTime},</if>
+            <if test="isShowSell != null  ">#{isShowSell},</if>
+            <if test="isScareBuy != null  ">#{isScareBuy},</if>
+            <if test="buyStartDate != null  ">#{buyStartDate},</if>
+            <if test="buyEndDate != null  ">#{buyEndDate},</if>
+            <if test="price != null  ">#{price},</if>
+            <if test="marketPrice != null  ">#{marketPrice},</if>
+            <if test="costPrice != null  ">#{costPrice},</if>
+            <if test="stock != null  ">#{stock},</if>
+            <if test="warningStock != null  ">#{warningStock},</if>
+            <if test="virtualSales != null  ">#{virtualSales},</if>
+            <if test="realSales != null  ">#{realSales},</if>
+            <if test="isHot != null  ">#{isHot},</if>
+            <if test="isDis != null  ">#{isDis},</if>
+            <if test="sort != null  ">#{sort},</if>
+            <if test="singleSku != null  ">#{singleSku},</if>
+            <if test="poster != null  and poster != ''  ">#{poster},</if>
+            <if test="sketch != null  and sketch != ''  ">#{sketch},</if>
+            <if test="pictureUrl != null  and pictureUrl != ''  ">#{pictureUrl},</if>
+            <if test="supplierId != null  ">#{supplierId},</if>
+            <if test="categoryId != null  and categoryId != ''  ">#{categoryId},</if>
+            <if test="featureId != null  ">#{featureId},</if>
+            <if test="merchantId != null  ">#{merchantId},</if>
+            <if test="shopId != null  ">#{shopId},</if>
+            <if test="typeId != null  ">#{typeId},</if>
+            <if test="brandId != null  ">#{brandId},</if>
+            <if test="groudId != null  ">#{groudId},</if>
+            <if test="tag != null  and tag != ''  ">#{tag},</if>
+            <if test="spuCode != null  and spuCode != ''  ">#{spuCode},</if>
+            <if test="unit != null  and unit != ''  ">#{unit},</if>
+            <if test="isIntegral != null  ">#{isIntegral},</if>
+            <if test="integral != null  ">#{integral},</if>
+            <if test="services != null  and services != ''  ">#{services},</if>
+            <if test="areaNames != null  and areaNames != ''  ">#{areaNames},</if>
+            <if test="areaName != null  and areaName != ''  ">#{areaName},</if>
+            <if test="isSendcode != null  ">#{isSendcode},</if>
+            <if test="reserveAddress != null  and reserveAddress != ''  ">#{reserveAddress},</if>
+            <if test="auditStatus != null  ">#{auditStatus},</if>
+            <if test="updateDate != null  ">#{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+            <if test="status != null  ">#{status},</if>
+            <if test="version != null  ">#{version},</if>
+            <if test="createDate != null  ">#{createDate},</if>
+        </trim>
+    </insert>
+
+    <update id="updateGdsSpu" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSpu">
+        update gds_spu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="spuName != null  and spuName != ''  ">spu_name = #{spuName},</if>
+            <if test="goodsStatus != null  ">goods_status = #{goodsStatus},</if>
+            <if test="upTime != null  ">up_time = #{upTime},</if>
+            <if test="downTime != null  ">down_time = #{downTime},</if>
+            <if test="isShowSell != null  ">is_show_sell = #{isShowSell},</if>
+            <if test="isScareBuy != null  ">is_scare_buy = #{isScareBuy},</if>
+            <if test="buyStartDate != null  ">buy_start_date = #{buyStartDate},</if>
+            <if test="buyEndDate != null  ">buy_end_date = #{buyEndDate},</if>
+            <if test="price != null  ">price = #{price},</if>
+            <if test="marketPrice != null  ">market_price = #{marketPrice},</if>
+            <if test="costPrice != null  ">cost_price = #{costPrice},</if>
+            <if test="stock != null  ">stock = #{stock},</if>
+            <if test="warningStock != null  ">warning_stock = #{warningStock},</if>
+            <if test="virtualSales != null  ">virtual_sales = #{virtualSales},</if>
+            <if test="realSales != null  ">real_sales = #{realSales},</if>
+            <if test="isHot != null  ">is_hot = #{isHot},</if>
+            <if test="isDis != null  ">is_dis = #{isDis},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="singleSku != null  ">single_sku = #{singleSku},</if>
+            <if test="poster != null  and poster != ''  ">poster = #{poster},</if>
+            <if test="sketch != null  and sketch != ''  ">sketch = #{sketch},</if>
+            <if test="pictureUrl != null  and pictureUrl != ''  ">picture_url = #{pictureUrl},</if>
+            <if test="supplierId != null  ">supplier_id = #{supplierId},</if>
+            <if test="categoryId != null  and categoryId != ''  ">category_id = #{categoryId},</if>
+            <if test="featureId != null  ">feature_id = #{featureId},</if>
+            <if test="merchantId != null  ">merchant_id = #{merchantId},</if>
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="typeId != null  ">type_id = #{typeId},</if>
+            <if test="brandId != null  ">brand_id = #{brandId},</if>
+            <if test="groudId != null  ">groud_id = #{groudId},</if>
+            <if test="tag != null  and tag != ''  ">tag = #{tag},</if>
+            <if test="spuCode != null  and spuCode != ''  ">spu_code = #{spuCode},</if>
+            <if test="unit != null  and unit != ''  ">unit = #{unit},</if>
+            <if test="isIntegral != null  ">is_integral = #{isIntegral},</if>
+            <if test="integral != null  ">integral = #{integral},</if>
+            <if test="services != null  and services != ''  ">services = #{services},</if>
+            <if test="areaNames != null  and areaNames != ''  ">area_names = #{areaNames},</if>
+            <if test="areaName != null  and areaName != ''  ">area_name = #{areaName},</if>
+            <if test="isSendcode != null  ">is_sendcode = #{isSendcode},</if>
+            <if test="reserveAddress != null  and reserveAddress != ''  ">reserve_address = #{reserveAddress},</if>
+            <if test="auditStatus != null  ">audit_status = #{auditStatus},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGdsSpuById" parameterType="Long">
+        update  gds_spu set status = 1 where id = #{id}
+    </delete>
+
+
+    <select id="selectListByFront" parameterType="com.jinshuo.mall.admin.application.dto.qry.gds.GdsSpuQry"
+            resultMap="GdsSpuResult">
+        <include refid="selectGdsSpuVo"/>
+        <where>
+            status=0 AND goods_tatus = 0
+            AND now() &gt; up_time
+            AND now() &lt; down_time
+            <if test="brandId != null  "> AND brand_id = #{brandId}</if>
+            <if test="category_id != null  "> AND brand_id = #{categoryId}</if>
+            <if test="name != null and name != '' "> AND name LIKE concat('%',#{name},'%') </if>
+            <if test="isScareBuy != null  "> AND is_scare_buy = #{isScareBuy},</if>
+            <if test="isHot != null  "> AND is_hot = #{isHot},</if>
+            <if test="isDis != null  "> AND is_dis = #{isDis},</if>
+            <if test="singleSku != null  "> AND single_sku = #{singleSku},</if>
+        </where>
+        <include refid="qryTypeLogic"/>
+        <include refid="sortLogic"/>
+    </select>
+
+    <!-- 查询类型逻辑处理  -->
+    <sql id="qryTypeLogic">
+        <choose>
+            <when test="null ！=qryType">
+                <!-- 查询类型 1：最新开抢 2：开抢预告  3:已结束抢购  4:即将结束抢购 -->
+                <if test="1==qryType"> AND is_scare_buy = 0 AND buy_start_date &lt; now() AND  now() &lt; buy_end_date  </if>
+                <if test="2==qryType"> AND is_scare_buy = 0 AND buy_start_date &gt; NOW()  </if>
+                <if test="3==qryType"> AND is_scare_buy = 0 AND buy_end_date 	&lt; NOW() </if>
+            </when>
+            <otherwise>
+            </otherwise>
+        </choose>
+
+    </sql>
+
+
+    <!-- 排序逻辑处理 -->
+    <sql id="sortLogic">
+        <choose>
+            <when test="null ！=sortType">
+                <if test="1==sortType">ORDER BY price</if>
+                <if test="2==sortType">ORDER BY realSales</if>
+                <if test="3==sortType">ORDER BY stock</if>
+                <if test="4==sortType">ORDER BY create_date</if>
+                <if test="5==sortType">ORDER BY sort</if>
+            </when>
+            <otherwise>
+                ORDER BY sort
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="null ！=isAscending">
+                <choose>
+                    <when test="0 ==isAscending">
+                    </when>
+                    <otherwise>
+                        DESC
+                    </otherwise>
+                </choose>
+            </when>
+            <otherwise>
+                DESC
+            </otherwise>
+        </choose>
+    </sql>
+
+</mapper>

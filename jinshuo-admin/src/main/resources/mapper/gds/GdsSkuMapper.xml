@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsSkuMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsSku" id="GdsSkuResult">
+        <result property="id"    column="id"    />
+        <result property="spuId"    column="spu_id"    />
+        <result property="skuCode"    column="sku_code"    />
+        <result property="skuName"    column="sku_name"    />
+        <result property="pictureUrl"    column="picture_url"    />
+        <result property="price"    column="price"    />
+        <result property="marketPrice"    column="market_price"    />
+        <result property="costPrice"    column="cost_price"    />
+        <result property="stock"    column="stock"    />
+        <result property="salesQuantity"    column="sales_quantity"    />
+        <result property="barCode"    column="bar_code"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectGdsSkuVo">
+        select id, spu_id, sku_code, sku_name, picture_url, price, market_price, cost_price, stock, sales_quantity, bar_code, create_date, update_date, remarks, status, version from gds_sku
+    </sql>
+	
+    <select id="selectGdsSkuList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSku" resultMap="GdsSkuResult">
+        <include refid="selectGdsSkuVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="spuId != null "> and spu_id = #{spuId}</if>
+             <if test="skuCode != null  and skuCode != '' "> and sku_code = #{skuCode}</if>
+             <if test="skuName != null  and skuName != '' "> and sku_name = #{skuName}</if>
+             <if test="pictureUrl != null  and pictureUrl != '' "> and picture_url = #{pictureUrl}</if>
+             <if test="price != null "> and price = #{price}</if>
+             <if test="marketPrice != null "> and market_price = #{marketPrice}</if>
+             <if test="costPrice != null "> and cost_price = #{costPrice}</if>
+             <if test="stock != null "> and stock = #{stock}</if>
+             <if test="salesQuantity != null "> and sales_quantity = #{salesQuantity}</if>
+             <if test="barCode != null  and barCode != '' "> and bar_code = #{barCode}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsSkuById" parameterType="Long" resultMap="GdsSkuResult">
+        <include refid="selectGdsSkuVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsSku" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSku">
+        insert into gds_sku
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="spuId != null  ">spu_id,</if>
+			<if test="skuCode != null  and skuCode != ''  ">sku_code,</if>
+			<if test="skuName != null  and skuName != ''  ">sku_name,</if>
+			<if test="pictureUrl != null  and pictureUrl != ''  ">picture_url,</if>
+			<if test="price != null  ">price,</if>
+			<if test="marketPrice != null  ">market_price,</if>
+			<if test="costPrice != null  ">cost_price,</if>
+			<if test="stock != null  ">stock,</if>
+			<if test="salesQuantity != null  ">sales_quantity,</if>
+			<if test="barCode != null  and barCode != ''  ">bar_code,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="spuId != null  ">#{spuId},</if>
+			<if test="skuCode != null  and skuCode != ''  ">#{skuCode},</if>
+			<if test="skuName != null  and skuName != ''  ">#{skuName},</if>
+			<if test="pictureUrl != null  and pictureUrl != ''  ">#{pictureUrl},</if>
+			<if test="price != null  ">#{price},</if>
+			<if test="marketPrice != null  ">#{marketPrice},</if>
+			<if test="costPrice != null  ">#{costPrice},</if>
+			<if test="stock != null  ">#{stock},</if>
+			<if test="salesQuantity != null  ">#{salesQuantity},</if>
+			<if test="barCode != null  and barCode != ''  ">#{barCode},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsSku" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSku">
+        update gds_sku
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="spuId != null  ">spu_id = #{spuId},</if>
+            <if test="skuCode != null  and skuCode != ''  ">sku_code = #{skuCode},</if>
+            <if test="skuName != null  and skuName != ''  ">sku_name = #{skuName},</if>
+            <if test="pictureUrl != null  and pictureUrl != ''  ">picture_url = #{pictureUrl},</if>
+            <if test="price != null  ">price = #{price},</if>
+            <if test="marketPrice != null  ">market_price = #{marketPrice},</if>
+            <if test="costPrice != null  ">cost_price = #{costPrice},</if>
+            <if test="stock != null  ">stock = #{stock},</if>
+            <if test="salesQuantity != null  ">sales_quantity = #{salesQuantity},</if>
+            <if test="barCode != null  and barCode != ''  ">bar_code = #{barCode},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsSkuById" parameterType="Long">
+        update  gds_sku set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

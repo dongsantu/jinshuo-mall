@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsShopFunctionMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsShopFunction" id="UmsShopFunctionResult">
+        <result property="id"    column="id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="functionId"    column="function_id"    />
+    </resultMap>
+	
+	<sql id="selectUmsShopFunctionVo">
+        select id, shop_id, function_id from ums_shop_function
+    </sql>
+	
+    <select id="selectUmsShopFunctionList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShopFunction" resultMap="UmsShopFunctionResult">
+        <include refid="selectUmsShopFunctionVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="functionId != null "> and function_id = #{functionId}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsShopFunctionById" parameterType="Long" resultMap="UmsShopFunctionResult">
+        <include refid="selectUmsShopFunctionVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsShopFunction" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShopFunction">
+        insert into ums_shop_function
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="functionId != null  ">function_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="functionId != null  ">#{functionId},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsShopFunction" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShopFunction">
+        update ums_shop_function
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="functionId != null  ">function_id = #{functionId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsShopFunctionById" parameterType="Long">
+        update  ums_shop_function set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

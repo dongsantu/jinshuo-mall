@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsUserMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsUser" id="UmsUserResult">
+        <result property="id"    column="id"    />
+        <result property="userType"    column="user_type"    />
+        <result property="merchantId"    column="merchant_id"    />
+        <result property="supplierId"    column="supplier_id"    />
+        <result property="shopId"    column="shop_id"    />
+        <result property="username"    column="username"    />
+        <result property="password"    column="password"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="name"    column="name"    />
+        <result property="cardType"    column="card_type"    />
+        <result property="cardId"    column="card_id"    />
+        <result property="email"    column="email"    />
+        <result property="createIpAt"    column="create_ip_at"    />
+        <result property="nickname"    column="nickname"    />
+        <result property="loginAt"    column="login_at"    />
+        <result property="loginIp"    column="login_ip"    />
+        <result property="loginCount"    column="login_count"    />
+        <result property="userStatus"    column="user_status"    />
+    </resultMap>
+	
+	<sql id="selectUmsUserVo">
+        select id, user_type, merchant_id, supplier_id, shop_id, username, password, mobile, name, card_type, card_id, email, create_ip_at, nickname, login_at, login_ip, login_count, user_status from ums_user
+    </sql>
+	
+    <select id="selectUmsUserList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUser" resultMap="UmsUserResult">
+        <include refid="selectUmsUserVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="userType != null "> and user_type = #{userType}</if>
+             <if test="merchantId != null "> and merchant_id = #{merchantId}</if>
+             <if test="supplierId != null "> and supplier_id = #{supplierId}</if>
+             <if test="shopId != null "> and shop_id = #{shopId}</if>
+             <if test="username != null  and username != '' "> and username = #{username}</if>
+             <if test="password != null  and password != '' "> and password = #{password}</if>
+             <if test="mobile != null  and mobile != '' "> and mobile = #{mobile}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="cardType != null "> and card_type = #{cardType}</if>
+             <if test="cardId != null  and cardId != '' "> and card_id = #{cardId}</if>
+             <if test="email != null  and email != '' "> and email = #{email}</if>
+             <if test="createIpAt != null  and createIpAt != '' "> and create_ip_at = #{createIpAt}</if>
+             <if test="nickname != null  and nickname != '' "> and nickname = #{nickname}</if>
+             <if test="loginAt != null "> and login_at = #{loginAt}</if>
+             <if test="loginIp != null  and loginIp != '' "> and login_ip = #{loginIp}</if>
+             <if test="loginCount != null "> and login_count = #{loginCount}</if>
+             <if test="userStatus != null "> and user_status = #{userStatus}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsUserById" parameterType="Long" resultMap="UmsUserResult">
+        <include refid="selectUmsUserVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsUser" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUser">
+        insert into ums_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="userType != null  ">user_type,</if>
+			<if test="merchantId != null  ">merchant_id,</if>
+			<if test="supplierId != null  ">supplier_id,</if>
+			<if test="shopId != null  ">shop_id,</if>
+			<if test="username != null  and username != ''  ">username,</if>
+			<if test="password != null  and password != ''  ">password,</if>
+			<if test="mobile != null  and mobile != ''  ">mobile,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="cardType != null  ">card_type,</if>
+			<if test="cardId != null  and cardId != ''  ">card_id,</if>
+			<if test="email != null  and email != ''  ">email,</if>
+			<if test="createIpAt != null  and createIpAt != ''  ">create_ip_at,</if>
+			<if test="nickname != null  and nickname != ''  ">nickname,</if>
+			<if test="loginAt != null  ">login_at,</if>
+			<if test="loginIp != null  and loginIp != ''  ">login_ip,</if>
+			<if test="loginCount != null  ">login_count,</if>
+			<if test="userStatus != null  ">user_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="userType != null  ">#{userType},</if>
+			<if test="merchantId != null  ">#{merchantId},</if>
+			<if test="supplierId != null  ">#{supplierId},</if>
+			<if test="shopId != null  ">#{shopId},</if>
+			<if test="username != null  and username != ''  ">#{username},</if>
+			<if test="password != null  and password != ''  ">#{password},</if>
+			<if test="mobile != null  and mobile != ''  ">#{mobile},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="cardType != null  ">#{cardType},</if>
+			<if test="cardId != null  and cardId != ''  ">#{cardId},</if>
+			<if test="email != null  and email != ''  ">#{email},</if>
+			<if test="createIpAt != null  and createIpAt != ''  ">#{createIpAt},</if>
+			<if test="nickname != null  and nickname != ''  ">#{nickname},</if>
+			<if test="loginAt != null  ">#{loginAt},</if>
+			<if test="loginIp != null  and loginIp != ''  ">#{loginIp},</if>
+			<if test="loginCount != null  ">#{loginCount},</if>
+			<if test="userStatus != null  ">#{userStatus},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsUser" parameterType="com.jinshuo.mall.admin.domain.ums.UmsUser">
+        update ums_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userType != null  ">user_type = #{userType},</if>
+            <if test="merchantId != null  ">merchant_id = #{merchantId},</if>
+            <if test="supplierId != null  ">supplier_id = #{supplierId},</if>
+            <if test="shopId != null  ">shop_id = #{shopId},</if>
+            <if test="username != null  and username != ''  ">username = #{username},</if>
+            <if test="password != null  and password != ''  ">password = #{password},</if>
+            <if test="mobile != null  and mobile != ''  ">mobile = #{mobile},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="cardType != null  ">card_type = #{cardType},</if>
+            <if test="cardId != null  and cardId != ''  ">card_id = #{cardId},</if>
+            <if test="email != null  and email != ''  ">email = #{email},</if>
+            <if test="createIpAt != null  and createIpAt != ''  ">create_ip_at = #{createIpAt},</if>
+            <if test="nickname != null  and nickname != ''  ">nickname = #{nickname},</if>
+            <if test="loginAt != null  ">login_at = #{loginAt},</if>
+            <if test="loginIp != null  and loginIp != ''  ">login_ip = #{loginIp},</if>
+            <if test="loginCount != null  ">login_count = #{loginCount},</if>
+            <if test="userStatus != null  ">user_status = #{userStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsUserById" parameterType="Long">
+        update  ums_user set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

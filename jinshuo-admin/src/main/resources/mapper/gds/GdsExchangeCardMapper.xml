@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsExchangeCardMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsExchangeCard" id="GdsExchangeCardResult">
+        <result property="id"    column="id"    />
+        <result property="exchangeId"    column="exchange_id"    />
+        <result property="cardSeq"    column="card_seq"    />
+        <result property="cardNo"    column="card_no"    />
+        <result property="cardPwd"    column="card_pwd"    />
+        <result property="cardStatus"    column="card_status"    />
+        <result property="useTime"    column="use_time"    />
+        <result property="activationStatus"    column="activation_status"    />
+        <result property="activationTime"    column="activation_time"    />
+        <result property="exchangeDate"    column="exchange_date"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectGdsExchangeCardVo">
+        select id, exchange_id, card_seq, card_no, card_pwd, card_status, use_time, activation_status, activation_time, exchange_date, create_date, update_date, remarks, status, version from gds_exchange_card
+    </sql>
+	
+    <select id="selectGdsExchangeCardList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsExchangeCard" resultMap="GdsExchangeCardResult">
+        <include refid="selectGdsExchangeCardVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="exchangeId != null "> and exchange_id = #{exchangeId}</if>
+             <if test="cardSeq != null "> and card_seq = #{cardSeq}</if>
+             <if test="cardNo != null  and cardNo != '' "> and card_no = #{cardNo}</if>
+             <if test="cardPwd != null  and cardPwd != '' "> and card_pwd = #{cardPwd}</if>
+             <if test="cardStatus != null "> and card_status = #{cardStatus}</if>
+             <if test="useTime != null "> and use_time = #{useTime}</if>
+             <if test="activationStatus != null "> and activation_status = #{activationStatus}</if>
+             <if test="activationTime != null "> and activation_time = #{activationTime}</if>
+             <if test="exchangeDate != null "> and exchange_date = #{exchangeDate}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsExchangeCardById" parameterType="Long" resultMap="GdsExchangeCardResult">
+        <include refid="selectGdsExchangeCardVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsExchangeCard" parameterType="com.jinshuo.mall.admin.domain.gds.GdsExchangeCard">
+        insert into gds_exchange_card
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="exchangeId != null  ">exchange_id,</if>
+			<if test="cardSeq != null  ">card_seq,</if>
+			<if test="cardNo != null  and cardNo != ''  ">card_no,</if>
+			<if test="cardPwd != null  and cardPwd != ''  ">card_pwd,</if>
+			<if test="cardStatus != null  ">card_status,</if>
+			<if test="useTime != null  ">use_time,</if>
+			<if test="activationStatus != null  ">activation_status,</if>
+			<if test="activationTime != null  ">activation_time,</if>
+			<if test="exchangeDate != null  ">exchange_date,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="exchangeId != null  ">#{exchangeId},</if>
+			<if test="cardSeq != null  ">#{cardSeq},</if>
+			<if test="cardNo != null  and cardNo != ''  ">#{cardNo},</if>
+			<if test="cardPwd != null  and cardPwd != ''  ">#{cardPwd},</if>
+			<if test="cardStatus != null  ">#{cardStatus},</if>
+			<if test="useTime != null  ">#{useTime},</if>
+			<if test="activationStatus != null  ">#{activationStatus},</if>
+			<if test="activationTime != null  ">#{activationTime},</if>
+			<if test="exchangeDate != null  ">#{exchangeDate},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsExchangeCard" parameterType="com.jinshuo.mall.admin.domain.gds.GdsExchangeCard">
+        update gds_exchange_card
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="exchangeId != null  ">exchange_id = #{exchangeId},</if>
+            <if test="cardSeq != null  ">card_seq = #{cardSeq},</if>
+            <if test="cardNo != null  and cardNo != ''  ">card_no = #{cardNo},</if>
+            <if test="cardPwd != null  and cardPwd != ''  ">card_pwd = #{cardPwd},</if>
+            <if test="cardStatus != null  ">card_status = #{cardStatus},</if>
+            <if test="useTime != null  ">use_time = #{useTime},</if>
+            <if test="activationStatus != null  ">activation_status = #{activationStatus},</if>
+            <if test="activationTime != null  ">activation_time = #{activationTime},</if>
+            <if test="exchangeDate != null  ">exchange_date = #{exchangeDate},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsExchangeCardById" parameterType="Long">
+        update  gds_exchange_card set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ord.OrdVerificationCodeLogMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ord.OrdVerificationCodeLog" id="OrdVerificationCodeLogResult">
+        <result property="id"    column="id"    />
+        <result property="verificationId"    column="verification_id"    />
+        <result property="supplierId"    column="supplier_id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="orderDetailId"    column="order_detail_id"    />
+        <result property="verifySn"    column="verify_sn"    />
+        <result property="userAccountId"    column="user_account_id"    />
+        <result property="name"    column="name"    />
+        <result property="errCode"    column="err_code"    />
+        <result property="errMsg"    column="err_msg"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectOrdVerificationCodeLogVo">
+        select id, verification_id, supplier_id, order_id, order_detail_id, verify_sn, user_account_id, name, err_code, err_msg, create_date, update_date, remarks, status, version from ord_verification_code_log
+    </sql>
+	
+    <select id="selectOrdVerificationCodeLogList" parameterType="com.jinshuo.mall.admin.domain.ord.OrdVerificationCodeLog" resultMap="OrdVerificationCodeLogResult">
+        <include refid="selectOrdVerificationCodeLogVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="verificationId != null "> and verification_id = #{verificationId}</if>
+             <if test="supplierId != null "> and supplier_id = #{supplierId}</if>
+             <if test="orderId != null "> and order_id = #{orderId}</if>
+             <if test="orderDetailId != null "> and order_detail_id = #{orderDetailId}</if>
+             <if test="verifySn != null  and verifySn != '' "> and verify_sn = #{verifySn}</if>
+             <if test="userAccountId != null "> and user_account_id = #{userAccountId}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="errCode != null "> and err_code = #{errCode}</if>
+             <if test="errMsg != null  and errMsg != '' "> and err_msg = #{errMsg}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectOrdVerificationCodeLogById" parameterType="Long" resultMap="OrdVerificationCodeLogResult">
+        <include refid="selectOrdVerificationCodeLogVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertOrdVerificationCodeLog" parameterType="com.jinshuo.mall.admin.domain.ord.OrdVerificationCodeLog">
+        insert into ord_verification_code_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="verificationId != null  ">verification_id,</if>
+			<if test="supplierId != null  ">supplier_id,</if>
+			<if test="orderId != null  ">order_id,</if>
+			<if test="orderDetailId != null  ">order_detail_id,</if>
+			<if test="verifySn != null  and verifySn != ''  ">verify_sn,</if>
+			<if test="userAccountId != null  ">user_account_id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="errCode != null  ">err_code,</if>
+			<if test="errMsg != null  and errMsg != ''  ">err_msg,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="verificationId != null  ">#{verificationId},</if>
+			<if test="supplierId != null  ">#{supplierId},</if>
+			<if test="orderId != null  ">#{orderId},</if>
+			<if test="orderDetailId != null  ">#{orderDetailId},</if>
+			<if test="verifySn != null  and verifySn != ''  ">#{verifySn},</if>
+			<if test="userAccountId != null  ">#{userAccountId},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="errCode != null  ">#{errCode},</if>
+			<if test="errMsg != null  and errMsg != ''  ">#{errMsg},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateOrdVerificationCodeLog" parameterType="com.jinshuo.mall.admin.domain.ord.OrdVerificationCodeLog">
+        update ord_verification_code_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="verificationId != null  ">verification_id = #{verificationId},</if>
+            <if test="supplierId != null  ">supplier_id = #{supplierId},</if>
+            <if test="orderId != null  ">order_id = #{orderId},</if>
+            <if test="orderDetailId != null  ">order_detail_id = #{orderDetailId},</if>
+            <if test="verifySn != null  and verifySn != ''  ">verify_sn = #{verifySn},</if>
+            <if test="userAccountId != null  ">user_account_id = #{userAccountId},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="errCode != null  ">err_code = #{errCode},</if>
+            <if test="errMsg != null  and errMsg != ''  ">err_msg = #{errMsg},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteOrdVerificationCodeLogById" parameterType="Long">
+        update  ord_verification_code_log set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

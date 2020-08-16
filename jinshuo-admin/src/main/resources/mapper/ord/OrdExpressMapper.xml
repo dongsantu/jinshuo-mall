@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ord.OrdExpressMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ord.OrdExpress" id="OrdExpressResult">
+        <result property="id"    column="id"    />
+        <result property="expressCompanyName"    column="express_company_name"    />
+        <result property="expressNo"    column="express_no"    />
+        <result property="expressCode"    column="express_code"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="createDate"    column="create_date"    />
+    </resultMap>
+	
+	<sql id="selectOrdExpressVo">
+        select id, express_company_name, express_no, express_code, order_id, create_date from ord_express
+    </sql>
+	
+    <select id="selectOrdExpressList" parameterType="com.jinshuo.mall.admin.domain.ord.OrdExpress" resultMap="OrdExpressResult">
+        <include refid="selectOrdExpressVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="expressCompanyName != null  and expressCompanyName != '' "> and express_company_name = #{expressCompanyName}</if>
+             <if test="expressNo != null  and expressNo != '' "> and express_no = #{expressNo}</if>
+             <if test="expressCode != null  and expressCode != '' "> and express_code = #{expressCode}</if>
+             <if test="orderId != null "> and order_id = #{orderId}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+         </where>
+    </select>
+    
+    <select id="selectOrdExpressById" parameterType="Long" resultMap="OrdExpressResult">
+        <include refid="selectOrdExpressVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertOrdExpress" parameterType="com.jinshuo.mall.admin.domain.ord.OrdExpress">
+        insert into ord_express
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="expressCompanyName != null  and expressCompanyName != ''  ">express_company_name,</if>
+			<if test="expressNo != null  and expressNo != ''  ">express_no,</if>
+			<if test="expressCode != null  and expressCode != ''  ">express_code,</if>
+			<if test="orderId != null  ">order_id,</if>
+			<if test="createDate != null  ">create_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="expressCompanyName != null  and expressCompanyName != ''  ">#{expressCompanyName},</if>
+			<if test="expressNo != null  and expressNo != ''  ">#{expressNo},</if>
+			<if test="expressCode != null  and expressCode != ''  ">#{expressCode},</if>
+			<if test="orderId != null  ">#{orderId},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateOrdExpress" parameterType="com.jinshuo.mall.admin.domain.ord.OrdExpress">
+        update ord_express
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="expressCompanyName != null  and expressCompanyName != ''  ">express_company_name = #{expressCompanyName},</if>
+            <if test="expressNo != null  and expressNo != ''  ">express_no = #{expressNo},</if>
+            <if test="expressCode != null  and expressCode != ''  ">express_code = #{expressCode},</if>
+            <if test="orderId != null  ">order_id = #{orderId},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteOrdExpressById" parameterType="Long">
+        update  ord_express set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsVisitorLogMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsVisitorLog" id="UmsVisitorLogResult">
+        <result property="id"    column="id"    />
+        <result property="userType"    column="user_type"    />
+        <result property="userId"    column="user_id"    />
+        <result property="ipAddr"    column="ip_addr"    />
+        <result property="visitCount"    column="visit_count"    />
+        <result property="visitFirstTime"    column="visit_first_time"    />
+        <result property="visitLastTime"    column="visit_last_time"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+        <result property="remarks"    column="remarks"    />
+    </resultMap>
+	
+	<sql id="selectUmsVisitorLogVo">
+        select id, user_type, user_id, ip_addr, visit_count, visit_first_time, visit_last_time, update_date, create_date, status, version, remarks from ums_visitor_log
+    </sql>
+	
+    <select id="selectUmsVisitorLogList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsVisitorLog" resultMap="UmsVisitorLogResult">
+        <include refid="selectUmsVisitorLogVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="userType != null "> and user_type = #{userType}</if>
+             <if test="userId != null "> and user_id = #{userId}</if>
+             <if test="ipAddr != null  and ipAddr != '' "> and ip_addr = #{ipAddr}</if>
+             <if test="visitCount != null "> and visit_count = #{visitCount}</if>
+             <if test="visitFirstTime != null "> and visit_first_time = #{visitFirstTime}</if>
+             <if test="visitLastTime != null "> and visit_last_time = #{visitLastTime}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsVisitorLogById" parameterType="Long" resultMap="UmsVisitorLogResult">
+        <include refid="selectUmsVisitorLogVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsVisitorLog" parameterType="com.jinshuo.mall.admin.domain.ums.UmsVisitorLog">
+        insert into ums_visitor_log
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="userType != null  ">user_type,</if>
+			<if test="userId != null  ">user_id,</if>
+			<if test="ipAddr != null  and ipAddr != ''  ">ip_addr,</if>
+			<if test="visitCount != null  ">visit_count,</if>
+			<if test="visitFirstTime != null  ">visit_first_time,</if>
+			<if test="visitLastTime != null  ">visit_last_time,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="userType != null  ">#{userType},</if>
+			<if test="userId != null  ">#{userId},</if>
+			<if test="ipAddr != null  and ipAddr != ''  ">#{ipAddr},</if>
+			<if test="visitCount != null  ">#{visitCount},</if>
+			<if test="visitFirstTime != null  ">#{visitFirstTime},</if>
+			<if test="visitLastTime != null  ">#{visitLastTime},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsVisitorLog" parameterType="com.jinshuo.mall.admin.domain.ums.UmsVisitorLog">
+        update ums_visitor_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userType != null  ">user_type = #{userType},</if>
+            <if test="userId != null  ">user_id = #{userId},</if>
+            <if test="ipAddr != null  and ipAddr != ''  ">ip_addr = #{ipAddr},</if>
+            <if test="visitCount != null  ">visit_count = #{visitCount},</if>
+            <if test="visitFirstTime != null  ">visit_first_time = #{visitFirstTime},</if>
+            <if test="visitLastTime != null  ">visit_last_time = #{visitLastTime},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsVisitorLogById" parameterType="Long">
+        update  ums_visitor_log set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

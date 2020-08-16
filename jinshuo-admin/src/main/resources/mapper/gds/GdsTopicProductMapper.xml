@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsTopicProductMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsTopicProduct" id="GdsTopicProductResult">
+        <result property="id"    column="id"    />
+        <result property="topicId"    column="topic_id"    />
+        <result property="spuId"    column="spu_id"    />
+        <result property="sort"    column="sort"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="createDate"    column="create_date"    />
+    </resultMap>
+	
+	<sql id="selectGdsTopicProductVo">
+        select id, topic_id, spu_id, sort, remarks, status, version, update_date, create_date from gds_topic_product
+    </sql>
+	
+    <select id="selectGdsTopicProductList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsTopicProduct" resultMap="GdsTopicProductResult">
+        <include refid="selectGdsTopicProductVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="topicId != null "> and topic_id = #{topicId}</if>
+             <if test="spuId != null "> and spu_id = #{spuId}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsTopicProductById" parameterType="Long" resultMap="GdsTopicProductResult">
+        <include refid="selectGdsTopicProductVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsTopicProduct" parameterType="com.jinshuo.mall.admin.domain.gds.GdsTopicProduct">
+        insert into gds_topic_product
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="topicId != null  ">topic_id,</if>
+			<if test="spuId != null  ">spu_id,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="createDate != null  ">create_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="topicId != null  ">#{topicId},</if>
+			<if test="spuId != null  ">#{spuId},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsTopicProduct" parameterType="com.jinshuo.mall.admin.domain.gds.GdsTopicProduct">
+        update gds_topic_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="topicId != null  ">topic_id = #{topicId},</if>
+            <if test="spuId != null  ">spu_id = #{spuId},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsTopicProductById" parameterType="Long">
+        update  gds_topic_product set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

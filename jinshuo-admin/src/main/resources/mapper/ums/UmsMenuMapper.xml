@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsMenuMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsMenu" id="UmsMenuResult">
+        <result property="id"    column="id"    />
+        <result property="menuRank"    column="menu_rank"    />
+        <result property="menuType"    column="menu_type"    />
+        <result property="menuName"    column="menu_name"    />
+        <result property="menuStatus"    column="menu_status"    />
+        <result property="sort"    column="sort"    />
+        <result property="pid"    column="pid"    />
+        <result property="menuDesc"    column="menu_desc"    />
+        <result property="menuCode"    column="menu_code"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+    </resultMap>
+	
+	<sql id="selectUmsMenuVo">
+        select id, menu_rank, menu_type, menu_name, menu_status, sort, pid, menu_desc, menu_code, status, version, create_date, update_date, remarks from ums_menu
+    </sql>
+	
+    <select id="selectUmsMenuList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMenu" resultMap="UmsMenuResult">
+        <include refid="selectUmsMenuVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="menuRank != null "> and menu_rank = #{menuRank}</if>
+             <if test="menuType != null "> and menu_type = #{menuType}</if>
+             <if test="menuName != null  and menuName != '' "> and menu_name = #{menuName}</if>
+             <if test="menuStatus != null "> and menu_status = #{menuStatus}</if>
+             <if test="sort != null "> and sort = #{sort}</if>
+             <if test="pid != null  and pid != '' "> and pid = #{pid}</if>
+             <if test="menuDesc != null  and menuDesc != '' "> and menu_desc = #{menuDesc}</if>
+             <if test="menuCode != null  and menuCode != '' "> and menu_code = #{menuCode}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsMenuById" parameterType="Long" resultMap="UmsMenuResult">
+        <include refid="selectUmsMenuVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsMenu" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMenu">
+        insert into ums_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="menuRank != null  ">menu_rank,</if>
+			<if test="menuType != null  ">menu_type,</if>
+			<if test="menuName != null  and menuName != ''  ">menu_name,</if>
+			<if test="menuStatus != null  ">menu_status,</if>
+			<if test="sort != null  ">sort,</if>
+			<if test="pid != null  and pid != ''  ">pid,</if>
+			<if test="menuDesc != null  and menuDesc != ''  ">menu_desc,</if>
+			<if test="menuCode != null  and menuCode != ''  ">menu_code,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="menuRank != null  ">#{menuRank},</if>
+			<if test="menuType != null  ">#{menuType},</if>
+			<if test="menuName != null  and menuName != ''  ">#{menuName},</if>
+			<if test="menuStatus != null  ">#{menuStatus},</if>
+			<if test="sort != null  ">#{sort},</if>
+			<if test="pid != null  and pid != ''  ">#{pid},</if>
+			<if test="menuDesc != null  and menuDesc != ''  ">#{menuDesc},</if>
+			<if test="menuCode != null  and menuCode != ''  ">#{menuCode},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsMenu" parameterType="com.jinshuo.mall.admin.domain.ums.UmsMenu">
+        update ums_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuRank != null  ">menu_rank = #{menuRank},</if>
+            <if test="menuType != null  ">menu_type = #{menuType},</if>
+            <if test="menuName != null  and menuName != ''  ">menu_name = #{menuName},</if>
+            <if test="menuStatus != null  ">menu_status = #{menuStatus},</if>
+            <if test="sort != null  ">sort = #{sort},</if>
+            <if test="pid != null  and pid != ''  ">pid = #{pid},</if>
+            <if test="menuDesc != null  and menuDesc != ''  ">menu_desc = #{menuDesc},</if>
+            <if test="menuCode != null  and menuCode != ''  ">menu_code = #{menuCode},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsMenuById" parameterType="Long">
+        update  ums_menu set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

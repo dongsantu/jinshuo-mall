@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsFunctionMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsFunction" id="UmsFunctionResult">
+        <result property="id"    column="id"    />
+        <result property="functionName"    column="function_name"    />
+        <result property="functionCode"    column="function_code"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+    </resultMap>
+	
+	<sql id="selectUmsFunctionVo">
+        select id, function_name, function_code, create_date, update_date, remarks, status, version from ums_function
+    </sql>
+	
+    <select id="selectUmsFunctionList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsFunction" resultMap="UmsFunctionResult">
+        <include refid="selectUmsFunctionVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="functionName != null  and functionName != '' "> and function_name = #{functionName}</if>
+             <if test="functionCode != null  and functionCode != '' "> and function_code = #{functionCode}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsFunctionById" parameterType="Long" resultMap="UmsFunctionResult">
+        <include refid="selectUmsFunctionVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsFunction" parameterType="com.jinshuo.mall.admin.domain.ums.UmsFunction">
+        insert into ums_function
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="functionName != null  and functionName != ''  ">function_name,</if>
+			<if test="functionCode != null  and functionCode != ''  ">function_code,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="functionName != null  and functionName != ''  ">#{functionName},</if>
+			<if test="functionCode != null  and functionCode != ''  ">#{functionCode},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsFunction" parameterType="com.jinshuo.mall.admin.domain.ums.UmsFunction">
+        update ums_function
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="functionName != null  and functionName != ''  ">function_name = #{functionName},</if>
+            <if test="functionCode != null  and functionCode != ''  ">function_code = #{functionCode},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsFunctionById" parameterType="Long">
+        update  ums_function set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

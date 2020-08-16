@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.ums.UmsShopMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.ums.UmsShop" id="UmsShopResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="merchantId"    column="merchant_id"    />
+        <result property="shopStatus"    column="shop_status"    />
+        <result property="type"    column="type"    />
+        <result property="sketch"    column="sketch"    />
+        <result property="linkMan"    column="link_man"    />
+        <result property="linkMobile"    column="link_mobile"    />
+        <result property="phone"    column="phone"    />
+        <result property="logo"    column="logo"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="version"    column="version"    />
+        <result property="status"    column="status"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+    </resultMap>
+	
+	<sql id="selectUmsShopVo">
+        select id, name, merchant_id, shop_status, type, sketch, link_man, link_mobile, phone, logo, start_time, end_time, version, status, create_date, update_date, remarks from ums_shop
+    </sql>
+	
+    <select id="selectUmsShopList" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShop" resultMap="UmsShopResult">
+        <include refid="selectUmsShopVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="merchantId != null "> and merchant_id = #{merchantId}</if>
+             <if test="shopStatus != null "> and shop_status = #{shopStatus}</if>
+             <if test="type != null "> and type = #{type}</if>
+             <if test="sketch != null  and sketch != '' "> and sketch = #{sketch}</if>
+             <if test="linkMan != null  and linkMan != '' "> and link_man = #{linkMan}</if>
+             <if test="linkMobile != null  and linkMobile != '' "> and link_mobile = #{linkMobile}</if>
+             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+             <if test="logo != null  and logo != '' "> and logo = #{logo}</if>
+             <if test="startTime != null "> and start_time = #{startTime}</if>
+             <if test="endTime != null "> and end_time = #{endTime}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+         </where>
+    </select>
+    
+    <select id="selectUmsShopById" parameterType="Long" resultMap="UmsShopResult">
+        <include refid="selectUmsShopVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertUmsShop" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShop">
+        insert into ums_shop
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="merchantId != null  ">merchant_id,</if>
+			<if test="shopStatus != null  ">shop_status,</if>
+			<if test="type != null  ">type,</if>
+			<if test="sketch != null  and sketch != ''  ">sketch,</if>
+			<if test="linkMan != null  and linkMan != ''  ">link_man,</if>
+			<if test="linkMobile != null  and linkMobile != ''  ">link_mobile,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="logo != null  and logo != ''  ">logo,</if>
+			<if test="startTime != null  ">start_time,</if>
+			<if test="endTime != null  ">end_time,</if>
+			<if test="version != null  ">version,</if>
+			<if test="status != null  ">status,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="merchantId != null  ">#{merchantId},</if>
+			<if test="shopStatus != null  ">#{shopStatus},</if>
+			<if test="type != null  ">#{type},</if>
+			<if test="sketch != null  and sketch != ''  ">#{sketch},</if>
+			<if test="linkMan != null  and linkMan != ''  ">#{linkMan},</if>
+			<if test="linkMobile != null  and linkMobile != ''  ">#{linkMobile},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="logo != null  and logo != ''  ">#{logo},</if>
+			<if test="startTime != null  ">#{startTime},</if>
+			<if test="endTime != null  ">#{endTime},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateUmsShop" parameterType="com.jinshuo.mall.admin.domain.ums.UmsShop">
+        update ums_shop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="merchantId != null  ">merchant_id = #{merchantId},</if>
+            <if test="shopStatus != null  ">shop_status = #{shopStatus},</if>
+            <if test="type != null  ">type = #{type},</if>
+            <if test="sketch != null  and sketch != ''  ">sketch = #{sketch},</if>
+            <if test="linkMan != null  and linkMan != ''  ">link_man = #{linkMan},</if>
+            <if test="linkMobile != null  and linkMobile != ''  ">link_mobile = #{linkMobile},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="logo != null  and logo != ''  ">logo = #{logo},</if>
+            <if test="startTime != null  ">start_time = #{startTime},</if>
+            <if test="endTime != null  ">end_time = #{endTime},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteUmsShopById" parameterType="Long">
+        update  ums_shop set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>

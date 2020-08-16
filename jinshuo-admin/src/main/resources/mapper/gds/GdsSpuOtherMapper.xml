@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jinshuo.mall.admin.infra.mapper.gds.GdsSpuOtherMapper">
+    
+    <resultMap type="com.jinshuo.mall.admin.domain.gds.GdsSpuOther" id="GdsSpuOtherResult">
+        <result property="id"    column="id"    />
+        <result property="spuId"    column="spu_id"    />
+        <result property="isShowSell"    column="is_show_sell"    />
+        <result property="courierFee"    column="courier_fee"    />
+        <result property="upTime"    column="up_time"    />
+        <result property="downTime"    column="down_time"    />
+        <result property="status"    column="status"    />
+        <result property="version"    column="version"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="updateDate"    column="update_date"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="buyStartDate"    column="buy_start_date"    />
+        <result property="buyEndDate"    column="buy_end_date"    />
+        <result property="activityAddress"    column="activity_address"    />
+        <result property="activityDate"    column="activity_date"    />
+        <result property="isScareBuy"    column="is_scare_buy"    />
+        <result property="activityStartDate"    column="activity_start_date"    />
+        <result property="activityEndDate"    column="activity_end_date"    />
+    </resultMap>
+	
+	<sql id="selectGdsSpuOtherVo">
+        select id, spu_id, is_show_sell, courier_fee, up_time, down_time, status, version, create_date, update_date, remarks, buy_start_date, buy_end_date, activity_address, activity_date, is_scare_buy, activity_start_date, activity_end_date from gds_spu_other
+    </sql>
+	
+    <select id="selectGdsSpuOtherList" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSpuOther" resultMap="GdsSpuOtherResult">
+        <include refid="selectGdsSpuOtherVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="spuId != null "> and spu_id = #{spuId}</if>
+             <if test="isShowSell != null "> and is_show_sell = #{isShowSell}</if>
+             <if test="courierFee != null "> and courier_fee = #{courierFee}</if>
+             <if test="upTime != null "> and up_time = #{upTime}</if>
+             <if test="downTime != null "> and down_time = #{downTime}</if>
+             <if test="status != null "> and status = #{status}</if>
+             <if test="version != null "> and version = #{version}</if>
+             <if test="createDate != null "> and create_date = #{createDate}</if>
+             <if test="updateDate != null "> and update_date = #{updateDate}</if>
+             <if test="remarks != null  and remarks != '' "> and remarks = #{remarks}</if>
+             <if test="buyStartDate != null "> and buy_start_date = #{buyStartDate}</if>
+             <if test="buyEndDate != null "> and buy_end_date = #{buyEndDate}</if>
+             <if test="activityAddress != null  and activityAddress != '' "> and activity_address = #{activityAddress}</if>
+             <if test="activityDate != null  and activityDate != '' "> and activity_date = #{activityDate}</if>
+             <if test="isScareBuy != null "> and is_scare_buy = #{isScareBuy}</if>
+             <if test="activityStartDate != null "> and activity_start_date = #{activityStartDate}</if>
+             <if test="activityEndDate != null "> and activity_end_date = #{activityEndDate}</if>
+         </where>
+    </select>
+    
+    <select id="selectGdsSpuOtherById" parameterType="Long" resultMap="GdsSpuOtherResult">
+        <include refid="selectGdsSpuOtherVo"/>
+        where status = 0 and id = #{id}
+    </select>
+        
+    <insert id="insertGdsSpuOther" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSpuOther">
+        insert into gds_spu_other
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="spuId != null  ">spu_id,</if>
+			<if test="isShowSell != null  ">is_show_sell,</if>
+			<if test="courierFee != null  ">courier_fee,</if>
+			<if test="upTime != null  ">up_time,</if>
+			<if test="downTime != null  ">down_time,</if>
+			<if test="status != null  ">status,</if>
+			<if test="version != null  ">version,</if>
+			<if test="createDate != null  ">create_date,</if>
+			<if test="updateDate != null  ">update_date,</if>
+			<if test="remarks != null  and remarks != ''  ">remarks,</if>
+			<if test="buyStartDate != null  ">buy_start_date,</if>
+			<if test="buyEndDate != null  ">buy_end_date,</if>
+			<if test="activityAddress != null  and activityAddress != ''  ">activity_address,</if>
+			<if test="activityDate != null  and activityDate != ''  ">activity_date,</if>
+			<if test="isScareBuy != null  ">is_scare_buy,</if>
+			<if test="activityStartDate != null  ">activity_start_date,</if>
+			<if test="activityEndDate != null  ">activity_end_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="spuId != null  ">#{spuId},</if>
+			<if test="isShowSell != null  ">#{isShowSell},</if>
+			<if test="courierFee != null  ">#{courierFee},</if>
+			<if test="upTime != null  ">#{upTime},</if>
+			<if test="downTime != null  ">#{downTime},</if>
+			<if test="status != null  ">#{status},</if>
+			<if test="version != null  ">#{version},</if>
+			<if test="createDate != null  ">#{createDate},</if>
+			<if test="updateDate != null  ">#{updateDate},</if>
+			<if test="remarks != null  and remarks != ''  ">#{remarks},</if>
+			<if test="buyStartDate != null  ">#{buyStartDate},</if>
+			<if test="buyEndDate != null  ">#{buyEndDate},</if>
+			<if test="activityAddress != null  and activityAddress != ''  ">#{activityAddress},</if>
+			<if test="activityDate != null  and activityDate != ''  ">#{activityDate},</if>
+			<if test="isScareBuy != null  ">#{isScareBuy},</if>
+			<if test="activityStartDate != null  ">#{activityStartDate},</if>
+			<if test="activityEndDate != null  ">#{activityEndDate},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateGdsSpuOther" parameterType="com.jinshuo.mall.admin.domain.gds.GdsSpuOther">
+        update gds_spu_other
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="spuId != null  ">spu_id = #{spuId},</if>
+            <if test="isShowSell != null  ">is_show_sell = #{isShowSell},</if>
+            <if test="courierFee != null  ">courier_fee = #{courierFee},</if>
+            <if test="upTime != null  ">up_time = #{upTime},</if>
+            <if test="downTime != null  ">down_time = #{downTime},</if>
+            <if test="status != null  ">status = #{status},</if>
+            <if test="version != null  ">version = #{version},</if>
+            <if test="createDate != null  ">create_date = #{createDate},</if>
+            <if test="updateDate != null  ">update_date = #{updateDate},</if>
+            <if test="remarks != null  and remarks != ''  ">remarks = #{remarks},</if>
+            <if test="buyStartDate != null  ">buy_start_date = #{buyStartDate},</if>
+            <if test="buyEndDate != null  ">buy_end_date = #{buyEndDate},</if>
+            <if test="activityAddress != null  and activityAddress != ''  ">activity_address = #{activityAddress},</if>
+            <if test="activityDate != null  and activityDate != ''  ">activity_date = #{activityDate},</if>
+            <if test="isScareBuy != null  ">is_scare_buy = #{isScareBuy},</if>
+            <if test="activityStartDate != null  ">activity_start_date = #{activityStartDate},</if>
+            <if test="activityEndDate != null  ">activity_end_date = #{activityEndDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteGdsSpuOtherById" parameterType="Long">
+        update  gds_spu_other set status = 1 where id = #{id}
+    </delete>
+    
+</mapper>
