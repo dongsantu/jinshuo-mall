@@ -40,7 +40,6 @@ public class JwtTokenUtil implements Serializable {
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         final Date createdDate = clock.now();
         final Date expirationDate = calculateExpirationDate(createdDate);
-
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
@@ -51,7 +50,10 @@ public class JwtTokenUtil implements Serializable {
     }
 
     private Date calculateExpirationDate(Date createdDate) {
-        return new Date(createdDate.getTime() + expiration);
+        log.info(" ----->>>>>>>> calculateExpirationDate，获取 token createdDate 入参->{}", createdDate);
+        Date expirationDate = new Date(createdDate.getTime() + expiration);
+        log.info(" ----->>>>>>>> calculateExpirationDate，获取 token expirationDate 入参->{}", expirationDate);
+        return expirationDate;
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
