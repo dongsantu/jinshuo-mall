@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@Api(description = "订单接口")
+@Api(tags = "用户—订单接口")
 @RequestMapping("/v1/h5/user/ordmain")
 public class OrdController {
 

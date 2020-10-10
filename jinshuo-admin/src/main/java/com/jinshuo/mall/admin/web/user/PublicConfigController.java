@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@Api(description = "配置参数查询主接口")
+@Api(tags = "用户—配置参数查询主接口")
 @RequestMapping("/v1/h5/user/config")
 public class PublicConfigController {
 }

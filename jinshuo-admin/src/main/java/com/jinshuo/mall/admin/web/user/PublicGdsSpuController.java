@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @RestController
-@Api(description = "产品中心主接口")
+@Api(tags = "用户—产品中心主接口")
 @RequestMapping("/v1/h5/user/gdsmain")
 public class PublicGdsSpuController {
 
